@@ -1,0 +1,139 @@
+{
+  "startNode": "wake_up",
+  "nodes": [
+    {
+      "id": "wake_up",
+      "speaker": "Aiko",
+      "text": "Psst… hey… wake up! Class ended like… five minutes ago.",
+      "next": "mc_confused"
+    },
+    {
+      "id": "mc_confused",
+      "speaker": "MC",
+      "text": "Huh—? Wha—? Oh… uh… sorry.",
+      "next": "aiko_tease"
+    },
+    {
+      "id": "aiko_tease",
+      "speaker": "Aiko",
+      "text": "You sleep like a little kid. It was kinda cute.",
+      "choices": [
+        { "text": "Who… who are you?", "next": "c1_who_are_you" },
+        { "text": "Why did you wake me up?", "next": "c2_why_wake" },
+        { "text": "Thank you for waking me up.", "next": "c3_thanks" }
+      ]
+    },
+    {
+      "id": "c1_who_are_you",
+      "speaker": "Aiko",
+      "text": "Oh! I'm Aiko. We’re in the same class! Not that you ever noticed. It’s okay though. I’ve noticed you plenty.",
+      "choices": [
+        { "text": "What do you mean by that?", "next": "c1a_meaning" },
+        { "text": "Nice to meet you, Aiko.", "next": "c1b_nice" },
+        { "text": "Sorry, I zone out a lot.", "next": "c1c_zone" }
+      ]
+    },
+    {
+      "id": "c1a_meaning",
+      "speaker": "Aiko",
+      "text": "Oh nothing! You stand out more than you think. Especially when you're asleep.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c1b_nice",
+      "speaker": "Aiko",
+      "text": "Aww, you're polite. That's adorable. I like people like you.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c1c_zone",
+      "speaker": "Aiko",
+      "text": "It’s fine! You looked peaceful. I didn't want anyone else waking you up. Or touching you.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c2_why_wake",
+      "speaker": "Aiko",
+      "text": "Because everyone else left and I didn’t want you getting locked in. I’d never leave you behind.",
+      "choices": [
+        { "text": "That’s really nice of you.", "next": "c2a_nice" },
+        { "text": "You could’ve just left me.", "next": "c2b_left" },
+        { "text": "Did you wait here the whole time?", "next": "c2c_wait" }
+      ]
+    },
+    {
+      "id": "c2a_nice",
+      "speaker": "Aiko",
+      "text": "Of course! I always look out for people I care abo— I mean, classmates.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c2b_left",
+      "speaker": "Aiko",
+      "text": "Left you? Why would I ever do that?",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c2c_wait",
+      "speaker": "Aiko",
+      "text": "Maaaaybe~ You looked peaceful. I didn't want anyone else waking you up.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c3_thanks",
+      "speaker": "Aiko",
+      "text": "You're welcome! If you ever need anything... I'm always around. Watching. I mean— nearby!",
+      "choices": [
+        { "text": "Why do you keep saying stuff like that?", "next": "c3a_weird" },
+        { "text": "You’re really friendly.", "next": "c3b_friendly" },
+        { "text": "Do you watch everyone this much?", "next": "c3c_watch" }
+      ]
+    },
+    {
+      "id": "c3a_weird",
+      "speaker": "Aiko",
+      "text": "Because it’s true. I pay attention. Don’t you like when people care?",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c3b_friendly",
+      "speaker": "Aiko",
+      "text": "Don’t say stuff like that! I’ll get the wrong idea… or the right one.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "c3c_watch",
+      "speaker": "Aiko",
+      "text": "No. Just you.",
+      "next": "scene_end_prompt"
+    },
+    {
+      "id": "scene_end_prompt",
+      "speaker": "Aiko",
+      "text": "Anyway! I was hoping we could walk home together—since we’re friends now.",
+      "choices": [
+        { "text": "No, I’d like that.", "next": "ending_good" },
+        { "text": "We barely know each other…", "next": "ending_suspicious" },
+        { "text": "Maybe another time.", "next": "ending_yandere" }
+      ]
+    },
+    {
+      "id": "ending_good",
+      "speaker": "Aiko",
+      "text": "I knew it. I *knew* you'd feel the same.",
+      "next": "END"
+    },
+    {
+      "id": "ending_suspicious",
+      "speaker": "Aiko",
+      "text": "Then we’ll fix that really fast.",
+      "next": "END"
+    },
+    {
+      "id": "ending_yandere",
+      "speaker": "Aiko",
+      "text": "I'm very patient. You’ll come around. Everyone does.",
+      "next": "END"
+    }
+  ]
+}
