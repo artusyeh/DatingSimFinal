@@ -277,6 +277,6 @@ public class DialogueManager : MonoBehaviour
             GoToNode(choice.next);
         });
 
-        Debug.Log("Created choice button: " + choice.text + " -> " + choice.next);
+        Debug.Log("Created choice button: " + choice.text + " > " + choice.next);
     }
 }
