@@ -38,6 +38,9 @@ public class DialogueManager : MonoBehaviour
     private string fullText = "";
     private Coroutine typingCoroutine;
 
+    //timer inspector
+    public TimerScript timerScript;
+
     void Start()
     {
         LoadDialogue();
@@ -140,6 +143,12 @@ public class DialogueManager : MonoBehaviour
 
         // Start typewriter effect for this node's text
         StartTyping(currentNode.text);
+
+         if(nodeId == "ending_good")
+         {
+          if (timerScript != null)
+          timerScript.StopTimer();
+         }
     }
 
     // TYPEWRITER LOGIC
@@ -274,9 +283,29 @@ public class DialogueManager : MonoBehaviour
 
         btn.onClick.AddListener(() =>
         {
-            GoToNode(choice.next);
+            //GoToNode(choice.next);
+            HandleChoiceSelection(choice);
         });
 
         Debug.Log("Created choice button: " + choice.text + " > " + choice.next);
     }
+    void HandleChoiceSelection(Choice choice)
+    {
+        if (!choice.isCorrect)
+        {
+            if (timerScript != null)
+                timerScript.StartTimer();
+        }
+
+        GoToNode(choice.next);
+        ClearChoices();
+
+        if (choice.next == "ending_good")
+        {
+            if (timerScript != null)
+                timerScript.StopTimer();
+        }
+    }
 }
+
+

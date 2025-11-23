@@ -18,9 +18,9 @@
       "speaker": "Aiko",
       "text": "You sleep like a little kid. It was kinda cute.",
       "choices": [
-        { "text": "Who… who are you?", "next": "c1_who_are_you" },
-        { "text": "Why did you wake me up?", "next": "c2_why_wake" },
-        { "text": "Thank you for waking me up.", "next": "c3_thanks" }
+        { "text": "Who… who are you?", "next": "c1_who_are_you", "isCorrect": true},
+        { "text": "Why did you wake me up?", "next": "c2_why_wake", "isCorrect": false },
+        { "text": "Thank you for waking me up.", "next": "c3_thanks", "isCorrect": false }
       ]
     },
     {
@@ -112,9 +112,9 @@
       "speaker": "Aiko",
       "text": "Anyway! I was hoping we could walk home together—since we’re friends now.",
       "choices": [
-        { "text": "No, I’d like that.", "next": "ending_good" },
-        { "text": "We barely know each other…", "next": "ending_suspicious" },
-        { "text": "Maybe another time.", "next": "ending_yandere" }
+        { "text": "No, I’d like that.", "next": "ending_good", "isCorrect": true },
+        { "text": "We barely know each other…", "next": "ending_suspicious","isCorrect": false },
+        { "text": "Maybe another time.", "next": "ending_yandere","isCorrect": false  }
       ]
     },
     {

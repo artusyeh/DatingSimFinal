@@ -1,29 +1,48 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime = 60f;
+    [SerializeField] float startingTime = 60f;
     [SerializeField] GameObject playAgainPanel;
     [SerializeField] ParticleSystem heartBreakparticles;
-    [SerializeField] Button yesButton;
-    [SerializeField] Button noButton;
     [SerializeField] ScreenShake screenShake;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip tickClip;
 
+    private float remainingTime;
     private int lastSecond = -1;
-
     private bool isBlinking = false;
 
     void Start()
     {
         if (playAgainPanel != null)
             playAgainPanel.SetActive(false);
+        
+        remainingTime = startingTime;
+        enabled = false;
+    }
+
+    public void StartTimer(bool reset = false)
+    {
+        if (reset)
+            remainingTime = startingTime;
+
+        enabled = true;
+
+        if (heartBreakparticles != null)
+            heartBreakparticles.Play();
+
+        if (screenShake != null)
+            StartCoroutine(screenShake.Shaking());
+    }
+    public void StopTimer()
+    {
+        enabled = false;              
+        isBlinking = false;           
+        timerText.color = Color.white; 
     }
 
     void Update()
@@ -50,7 +69,7 @@ public class TimerScript : MonoBehaviour
 
         if (remainingTime <= 10)
         {
-            if (seconds != lastSecond)
+            if (seconds != lastSecond) 
             {
                 lastSecond = seconds;
                 if (audioSource != null && tickClip != null)
@@ -61,14 +80,16 @@ public class TimerScript : MonoBehaviour
         }
 
 
-        void EndGame()
-        {
-            enabled = false;
+    void EndGame()
+    {
+        enabled = false;
+        isBlinking = false;
+        timerText.color = Color.white;
 
-            if (playAgainPanel != null)
-                playAgainPanel.SetActive(true);
-        }
+        if (playAgainPanel != null)
+            playAgainPanel.SetActive(true);
     }
+        }
 
     public void RestartScene()
     {
@@ -86,7 +107,7 @@ public class TimerScript : MonoBehaviour
         }
     }
 
-    public void OnNoButtonClick()
+  /*  public void OnNoButtonClick()
     {
         remainingTime -= 5f;
         if (remainingTime < 0) remainingTime = 0;
@@ -108,5 +129,5 @@ public class TimerScript : MonoBehaviour
     {
         if (yesButton != null) yesButton.gameObject.SetActive(false);
         if (noButton != null) noButton.gameObject.SetActive(false);
-    }
+    }*/
 }

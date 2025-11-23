@@ -6,6 +6,7 @@ public class Choice
 {
     public string text;
     public string next;   // id of the next node
+    public bool isCorrect;
 }
 
 [Serializable]
