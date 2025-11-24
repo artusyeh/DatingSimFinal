@@ -8,9 +8,12 @@ public class TimerScript : MonoBehaviour
     [SerializeField] float startingTime = 60f;
     [SerializeField] GameObject playAgainPanel;
     [SerializeField] ParticleSystem heartBreakparticles;
+    [SerializeField] ParticleSystem heartParticles;
     [SerializeField] ScreenShake screenShake;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip tickClip;
+    [SerializeField] AudioClip heartClip;
+    [SerializeField] AudioClip heartbreakClip;
 
     private float remainingTime;
     private int lastSecond = -1;
@@ -32,17 +35,28 @@ public class TimerScript : MonoBehaviour
 
         enabled = true;
 
-        if (heartBreakparticles != null)
+        if (heartBreakparticles != null) 
             heartBreakparticles.Play();
+       
+        if (audioSource != null && heartbreakClip != null)
+            audioSource.PlayOneShot(heartbreakClip);
 
-        if (screenShake != null)
-            StartCoroutine(screenShake.Shaking());
+        // if (screenShake != null)
+        // StartCoroutine(screenShake.Shaking());
     }
     public void StopTimer()
     {
         enabled = false;              
         isBlinking = false;           
-        timerText.color = Color.white; 
+        timerText.color = Color.white;
+
+        StopAllCoroutines();
+
+        if (heartParticles != null)
+            heartParticles.Play();
+
+        if (audioSource != null && heartClip != null)
+            audioSource.PlayOneShot(heartClip);
     }
 
     void Update()
@@ -69,7 +83,7 @@ public class TimerScript : MonoBehaviour
 
         if (remainingTime <= 10)
         {
-            if (seconds != lastSecond) 
+            if (seconds != lastSecond)
             {
                 lastSecond = seconds;
                 if (audioSource != null && tickClip != null)
@@ -78,7 +92,7 @@ public class TimerScript : MonoBehaviour
                 }
             }
         }
-
+    }
 
     void EndGame()
     {
@@ -89,7 +103,7 @@ public class TimerScript : MonoBehaviour
         if (playAgainPanel != null)
             playAgainPanel.SetActive(true);
     }
-        }
+        
 
     public void RestartScene()
     {

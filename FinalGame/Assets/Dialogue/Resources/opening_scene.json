@@ -20,7 +20,7 @@
       "choices": [
         { "text": "Who… who are you?", "next": "c1_who_are_you", "isCorrect": true},
         { "text": "Why did you wake me up?", "next": "c2_why_wake", "isCorrect": false },
-        { "text": "Thank you for waking me up.", "next": "c3_thanks", "isCorrect": false }
+        { "text": "Thank you for waking me up.", "next": "c3_thanks", "isCorrect": true }
       ]
     },
     {
@@ -28,9 +28,9 @@
       "speaker": "Aiko",
       "text": "Oh! I'm Aiko. We’re in the same class! Not that you ever noticed. It’s okay though. I’ve noticed you plenty.",
       "choices": [
-        { "text": "What do you mean by that?", "next": "c1a_meaning" },
-        { "text": "Nice to meet you, Aiko.", "next": "c1b_nice" },
-        { "text": "Sorry, I zone out a lot.", "next": "c1c_zone" }
+        { "text": "What do you mean by that?", "next": "c1a_meaning", "isCorrect": true },
+        { "text": "Nice to meet you, Aiko.", "next": "c1b_nice", "isCorrect": true },
+        { "text": "Sorry, I zone out a lot.", "next": "c1c_zone", "isCorrect": false }
       ]
     },
     {
@@ -56,9 +56,9 @@
       "speaker": "Aiko",
       "text": "Because everyone else left and I didn’t want you getting locked in. I’d never leave you behind.",
       "choices": [
-        { "text": "That’s really nice of you.", "next": "c2a_nice" },
-        { "text": "You could’ve just left me.", "next": "c2b_left" },
-        { "text": "Did you wait here the whole time?", "next": "c2c_wait" }
+        { "text": "That’s really nice of you.", "next": "c2a_nice", "isCorrect": true },
+        { "text": "You could’ve just left me.", "next": "c2b_left", "isCorrect": false },
+        { "text": "Did you wait here the whole time?", "next": "c2c_wait", "isCorrect": true }
       ]
     },
     {
@@ -84,9 +84,9 @@
       "speaker": "Aiko",
       "text": "You're welcome! If you ever need anything... I'm always around. Watching. I mean— nearby!",
       "choices": [
-        { "text": "Why do you keep saying stuff like that?", "next": "c3a_weird" },
-        { "text": "You’re really friendly.", "next": "c3b_friendly" },
-        { "text": "Do you watch everyone this much?", "next": "c3c_watch" }
+        { "text": "Why do you keep saying stuff like that?", "next": "c3a_weird", "isCorrect": false },
+        { "text": "You’re really friendly.", "next": "c3b_friendly", "isCorrect": true  },
+        { "text": "Do you watch everyone this much?", "next": "c3c_watch", "isCorrect": false  }
       ]
     },
     {
