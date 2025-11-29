@@ -1,139 +1,702 @@
 {
-  "startNode": "wake_up",
+  "startNode": "mc_open_1",
   "nodes": [
     {
-      "id": "wake_up",
-      "speaker": "Aiko",
-      "text": "Psst… hey… wake up! Class ended like… five minutes ago.",
-      "next": "mc_confused"
-    },
-    {
-      "id": "mc_confused",
+      "id": "mc_open_1",
       "speaker": "MC",
-      "text": "Huh—? Wha—? Oh… uh… sorry.",
-      "next": "aiko_tease"
+      "text": "I stare dumbfounded at my annoying childhood friend Aiko.",
+      "next": "mc_open_2"
     },
     {
-      "id": "aiko_tease",
+      "id": "mc_open_2",
+      "speaker": "MC",
+      "text": "I always catch the most random strays from this woman.",
+      "next": "mc_open_3"
+    },
+    {
+      "id": "mc_open_3",
+      "speaker": "MC",
+      "text": "Maybe it's because I don't really have a social life... And she's the type of person to force herself into yours.",
+      "next": "aiko_teasing_1"
+    },
+
+    {
+      "id": "aiko_teasing_1",
       "speaker": "Aiko",
-      "text": "You sleep like a little kid. It was kinda cute.",
+      "text": "I swear, if sleeping were a major, you’d be top of the department the way you're snoozing.",
+      "next": "mc_defensive_1"
+    },
+    {
+      "id": "mc_defensive_1",
+      "speaker": "MC",
+      "text": "It wasn’t that bad today???",
+      "next": "aiko_teasing_2"
+    },
+    {
+      "id": "aiko_teasing_2",
+      "speaker": "Aiko",
+      "text": "You were drooling on your notebook again…",
+      "next": "mc_denial"
+    },
+    {
+      "id": "mc_denial",
+      "speaker": "MC",
+      "text": "No I wasn’t?",
+      "next": "aiko_picture"
+    },
+    {
+      "id": "aiko_picture",
+      "speaker": "Aiko",
+      "text": "Oh really? Should I show you the picture?",
+      "next": "mc_show_what"
+    },
+    {
+      "id": "mc_show_what",
+      "speaker": "MC",
+      "text": "Show WHAT??",
+      "next": "aiko_document_1"
+    },
+    {
+      "id": "aiko_document_1",
+      "speaker": "Aiko",
+      "text": "Of course. Someone has to document your academic downfall for posterity.",
+      "next": "aiko_document_2"
+    },
+    {
+      "id": "aiko_document_2",
+      "speaker": "Aiko",
+      "text": "…And because it’s cute.",
+      "next": "mc_cute_1"
+    },
+    {
+      "id": "mc_cute_1",
+      "speaker": "MC",
+      "text": "Cute..? Right.",
+      "next": "mc_cute_2"
+    },
+    {
+      "id": "mc_cute_2",
+      "speaker": "MC",
+      "text": "And most people would call that borderline stalking.",
+      "next": "aiko_stalking"
+    },
+    {
+      "id": "aiko_stalking",
+      "speaker": "Aiko",
+      "text": "If I were stalking you, you’d never catch me anyway.",
+      "next": "narrator_laugh"
+    },
+    {
+      "id": "narrator_laugh",
+      "speaker": "Narrator",
+      "text": "She laughs playfully.",
+      "next": "aiko_late_1"
+    },
+    {
+      "id": "aiko_late_1",
+      "speaker": "Aiko",
+      "text": "Anyways we’re gonna be late for the next lecture if you lie here forever.",
+      "next": "aiko_ask_walk"
+    },
+    {
+      "id": "aiko_ask_walk",
+      "speaker": "Aiko",
+      "text": "So… Will you walk me to class?",
       "choices": [
-        { "text": "Who… who are you?", "next": "c1_who_are_you", "isCorrect": true},
-        { "text": "Why did you wake me up?", "next": "c2_why_wake", "isCorrect": false },
-        { "text": "Thank you for waking me up.", "next": "c3_thanks", "isCorrect": true }
+        {
+          "text": "Yeah, sure. Let’s go.",
+          "next": "branch_yes_walk",
+          "isCorrect": true
+        },
+        {
+          "text": "I think I’ll go on my own.",
+          "next": "branch_no_walk",
+          "isCorrect": false
+        }
       ]
     },
+
     {
-      "id": "c1_who_are_you",
-      "speaker": "Aiko",
-      "text": "Oh! I'm Aiko. We’re in the same class! Not that you ever noticed. It’s okay though. I’ve noticed you plenty.",
-      "choices": [
-        { "text": "What do you mean by that?", "next": "c1a_meaning", "isCorrect": true },
-        { "text": "Nice to meet you, Aiko.", "next": "c1b_nice", "isCorrect": true },
-        { "text": "Sorry, I zone out a lot.", "next": "c1c_zone", "isCorrect": false }
-      ]
+      "id": "branch_yes_walk",
+      "speaker": "MC",
+      "text": "Yeah, sure. Let’s go.",
+      "next": "aiko_brightens"
     },
     {
-      "id": "c1a_meaning",
+      "id": "aiko_brightens",
       "speaker": "Aiko",
-      "text": "Oh nothing! You stand out more than you think. Especially when you're asleep.",
-      "next": "scene_end_prompt"
+      "text": "(Brightens instantly)",
+      "next": "aiko_knew_it"
     },
     {
-      "id": "c1b_nice",
+      "id": "aiko_knew_it",
       "speaker": "Aiko",
-      "text": "Aww, you're polite. That's adorable. I like people like you.",
-      "next": "scene_end_prompt"
+      "text": "I knew you would.",
+      "next": "timer_stop_good_walk"
     },
     {
-      "id": "c1c_zone",
-      "speaker": "Aiko",
-      "text": "It’s fine! You looked peaceful. I didn't want anyone else waking you up. Or touching you.",
-      "next": "scene_end_prompt"
+      "id": "timer_stop_good_walk",
+      "speaker": "TimerControl:Stop",
+      "text": "STOP_AND_RESET_TIMER",
+      "next": "good_walk_scene"
     },
     {
-      "id": "c2_why_wake",
-      "speaker": "Aiko",
-      "text": "Because everyone else left and I didn’t want you getting locked in. I’d never leave you behind.",
-      "choices": [
-        { "text": "That’s really nice of you.", "next": "c2a_nice", "isCorrect": true },
-        { "text": "You could’ve just left me.", "next": "c2b_left", "isCorrect": false },
-        { "text": "Did you wait here the whole time?", "next": "c2c_wait", "isCorrect": true }
-      ]
-    },
-    {
-      "id": "c2a_nice",
-      "speaker": "Aiko",
-      "text": "Of course! I always look out for people I care abo— I mean, classmates.",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "c2b_left",
-      "speaker": "Aiko",
-      "text": "Left you? Why would I ever do that?",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "c2c_wait",
-      "speaker": "Aiko",
-      "text": "Maaaaybe~ You looked peaceful. I didn't want anyone else waking you up.",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "c3_thanks",
-      "speaker": "Aiko",
-      "text": "You're welcome! If you ever need anything... I'm always around. Watching. I mean— nearby!",
-      "choices": [
-        { "text": "Why do you keep saying stuff like that?", "next": "c3a_weird", "isCorrect": false },
-        { "text": "You’re really friendly.", "next": "c3b_friendly", "isCorrect": true  },
-        { "text": "Do you watch everyone this much?", "next": "c3c_watch", "isCorrect": false  }
-      ]
-    },
-    {
-      "id": "c3a_weird",
-      "speaker": "Aiko",
-      "text": "Because it’s true. I pay attention. Don’t you like when people care?",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "c3b_friendly",
-      "speaker": "Aiko",
-      "text": "Don’t say stuff like that! I’ll get the wrong idea… or the right one.",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "c3c_watch",
-      "speaker": "Aiko",
-      "text": "No. Just you.",
-      "next": "scene_end_prompt"
-    },
-    {
-      "id": "scene_end_prompt",
-      "speaker": "Aiko",
-      "text": "Anyway! I was hoping we could walk home together—since we’re friends now.",
-      "choices": [
-        { "text": "No, I’d like that.", "next": "ending_good", "isCorrect": true },
-        { "text": "We barely know each other…", "next": "ending_suspicious","isCorrect": false },
-        { "text": "Maybe another time.", "next": "ending_yandere","isCorrect": false  }
-      ]
-    },
-    {
-      "id": "ending_good",
-      "speaker": "Aiko",
-      "text": "I knew it. I *knew* you'd feel the same.",
+      "id": "good_walk_scene",
+      "speaker": "Narrator",
+      "text": "You fall into step beside Aiko as you both head toward the next lecture.",
       "next": "END"
     },
+
     {
-      "id": "ending_suspicious",
-      "speaker": "Aiko",
-      "text": "Then we’ll fix that really fast.",
-      "next": "END"
+      "id": "branch_no_walk",
+      "speaker": "MC",
+      "text": "I think I’ll go on my own.",
+      "next": "timer_continue_start"
     },
     {
-      "id": "ending_yandere",
+      "id": "timer_continue_start",
+      "speaker": "TimerControl:Continue",
+      "text": "TIMER_START_OR_CONTINUE",
+      "next": "aiko_hurt_1"
+    },
+    {
+      "id": "aiko_hurt_1",
       "speaker": "Aiko",
-      "text": "I'm very patient. You’ll come around. Everyone does.",
+      "text": "Oh…So you don’t wanna walk with me?",
+      "next": "mc_not_that"
+    },
+    {
+      "id": "mc_not_that",
+      "speaker": "MC",
+      "text": "It’s not that-",
+      "next": "aiko_you_hate_me"
+    },
+    {
+      "id": "aiko_you_hate_me",
+      "speaker": "Aiko",
+      "text": "You must really hate me then.",
+      "next": "mc_what_shock"
+    },
+    {
+      "id": "mc_what_shock",
+      "speaker": "MC",
+      "text": "What???",
+      "next": "aiko_hurt_2"
+    },
+    {
+      "id": "aiko_hurt_2",
+      "speaker": "Aiko",
+      "text": "I’m always trying to hang out with you and you never show the same effort.",
+      "next": "second_branch_prompt"
+    },
+
+    {
+      "id": "second_branch_prompt",
+      "speaker": "MC",
+      "text": "",
+      "choices": [
+        {
+          "text": "I can hang out with you later.",
+          "next": "opt1_later",
+          "isCorrect": false
+        },
+        {
+          "text": "I didn’t mean it that way.",
+          "next": "opt2_didnt_mean",
+          "isCorrect": true
+        },
+        {
+          "text": "Okay we can walk together.",
+          "next": "opt3_okay_walk",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "opt1_later",
+      "speaker": "MC",
+      "text": "I can hang out with you later.",
+      "next": "aiko_you_always_say_that"
+    },
+    {
+      "id": "aiko_you_always_say_that",
+      "speaker": "Aiko",
+      "text": "You always say that…",
+      "next": "aiko_just_say_dont_want"
+    },
+    {
+      "id": "aiko_just_say_dont_want",
+      "speaker": "Aiko",
+      "text": "Just say you don’t want to hang out with me.",
+      "next": "opt1_followup"
+    },
+    {
+      "id": "opt1_followup",
+      "speaker": "MC",
+      "text": "",
+      "choices": [
+        {
+          "text": "That’s not true. I do want to hang out with you.",
+          "next": "opt1A_recover",
+          "isCorrect": true
+        },
+        {
+          "text": "You’re overthinking this, Aiko.",
+          "next": "opt1B_worse",
+          "isCorrect": false
+        }
+      ]
+    },
+
+    {
+      "id": "opt1A_recover",
+      "speaker": "MC",
+      "text": "That’s not true. I do want to hang out with you.",
+      "next": "aiko_why_put_off"
+    },
+    {
+      "id": "aiko_why_put_off",
+      "speaker": "Aiko",
+      "text": "Then why does it always sound like you’re putting me off?",
+      "next": "mc_didnt_mean_merge"
+    },
+    {
+      "id": "mc_didnt_mean_merge",
+      "speaker": "MC",
+      "text": "I didn’t mean it that way.",
+      "next": "aiko_okay_what_mean"
+    },
+
+    {
+      "id": "opt1B_worse",
+      "speaker": "MC",
+      "text": "You’re overthinking this, Aiko.",
+      "next": "aiko_right_of_course"
+    },
+    {
+      "id": "aiko_right_of_course",
+      "speaker": "Aiko",
+      "text": "…Right. Of course.",
+      "next": "narrator_expression_hardens"
+    },
+    {
+      "id": "narrator_expression_hardens",
+      "speaker": "Narrator",
+      "text": "Her expression hardens.",
+      "next": "aiko_its_fine_bad_1"
+    },
+    {
+      "id": "aiko_its_fine_bad_1",
+      "speaker": "Aiko",
+      "text": "It’s fine.",
+      "next": "aiko_other_problems"
+    },
+    {
+      "id": "aiko_other_problems",
+      "speaker": "Aiko",
+      "text": "You don’t want to walk with me because you have other problems.",
+      "next": "aiko_see_you_class"
+    },
+    {
+      "id": "aiko_see_you_class",
+      "speaker": "Aiko",
+      "text": "See you in class then.",
+      "next": "aiko_dont_be_late"
+    },
+    {
+      "id": "aiko_dont_be_late",
+      "speaker": "Aiko",
+      "text": "Don’t be late…",
+      "next": "bad_walk_scene_lock"
+    },
+    {
+      "id": "bad_walk_scene_lock",
+      "speaker": "TimerControl:Continue",
+      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING",
       "next": "END"
+    },
+
+    {
+      "id": "opt2_didnt_mean",
+      "speaker": "MC",
+      "text": "I didn’t mean it that way.",
+      "next": "aiko_okay_what_mean"
+    },
+    {
+      "id": "aiko_okay_what_mean",
+      "speaker": "Aiko",
+      "text": "Okay so what do you mean then?",
+      "next": "opt2_followup_choices"
+    },
+    {
+      "id": "opt2_followup_choices",
+      "speaker": "MC",
+      "text": "",
+      "choices": [
+        {
+          "text": "I’m just bad at showing it, but I like spending time with you.",
+          "next": "opt2A_best",
+          "isCorrect": true
+        },
+        {
+          "text": "I’ve just been tired and stressed. It’s not about you.",
+          "next": "opt2B_tired",
+          "isCorrect": true
+        },
+        {
+          "text": "I didn’t think it mattered if we walked together or not.",
+          "next": "opt2C_mattered",
+          "isCorrect": false
+        }
+      ]
+    },
+
+    {
+      "id": "opt2A_best",
+      "speaker": "MC",
+      "text": "I’m just bad at showing it, but I like spending time with you. I want to be with you right now.",
+      "next": "aiko_really_bad"
+    },
+    {
+      "id": "aiko_really_bad",
+      "speaker": "Aiko",
+      "text": "…You’re really bad at this, you know that?",
+      "next": "mc_yeah_know"
+    },
+    {
+      "id": "mc_yeah_know",
+      "speaker": "MC",
+      "text": "Yeah. I know.",
+      "next": "narrator_tries_not_smile"
+    },
+    {
+      "id": "narrator_tries_not_smile",
+      "speaker": "Narrator",
+      "text": "She looks away, but she’s clearly trying not to smile.",
+      "next": "aiko_walk_now"
+    },
+    {
+      "id": "aiko_walk_now",
+      "speaker": "Aiko",
+      "text": "So… does that mean you’ll walk me to class now, or are you gonna say “later” again?",
+      "next": "mc_no_later"
+    },
+    {
+      "id": "mc_no_later",
+      "speaker": "MC",
+      "text": "No “later.”\nLet’s go.",
+      "next": "aiko_dont_regret"
+    },
+    {
+      "id": "aiko_dont_regret",
+      "speaker": "Aiko",
+      "text": "Okay. Then… don’t make me regret waiting for you.",
+      "next": "timer_stop_2A"
+    },
+    {
+      "id": "timer_stop_2A",
+      "speaker": "TimerControl:Stop",
+      "text": "STOP_AND_RESET_TIMER",
+      "next": "good_walk_scene"
+    },
+
+    {
+      "id": "opt2B_tired",
+      "speaker": "MC",
+      "text": "I’ve just been tired and stressed. It’s not about you.",
+      "next": "aiko_not_about_me"
+    },
+    {
+      "id": "aiko_not_about_me",
+      "speaker": "Aiko",
+      "text": "…Not about me, huh?",
+      "next": "mc_explain_tired_1"
+    },
+    {
+      "id": "mc_explain_tired_1",
+      "speaker": "MC",
+      "text": "Yeah. I’m not avoiding you or anything.",
+      "next": "mc_explain_tired_2"
+    },
+    {
+      "id": "mc_explain_tired_2",
+      "speaker": "MC",
+      "text": "I’m just… fried.",
+      "next": "mc_explain_tired_3"
+    },
+    {
+      "id": "mc_explain_tired_3",
+      "speaker": "MC",
+      "text": "Sometimes it feels easier to say “later” than explain all that.",
+      "next": "aiko_could_have_said"
+    },
+    {
+      "id": "aiko_could_have_said",
+      "speaker": "Aiko",
+      "text": "You could’ve just said that from the start, you know.",
+      "next": "aiko_instead_brushing_off"
+    },
+    {
+      "id": "aiko_instead_brushing_off",
+      "speaker": "Aiko",
+      "text": "Instead of making it sound like you’re brushing me off.",
+      "next": "narrator_relaxes"
+    },
+    {
+      "id": "narrator_relaxes",
+      "speaker": "Narrator",
+      "text": "(She relaxes a little, but she still looks a bit hurt.)",
+      "next": "aiko_i_get_tired"
+    },
+    {
+      "id": "aiko_i_get_tired",
+      "speaker": "Aiko",
+      "text": "I get being tired. I really do.",
+      "next": "aiko_feels_extra"
+    },
+    {
+      "id": "aiko_feels_extra",
+      "speaker": "Aiko",
+      "text": "But when you keep saying “later,” it feels like I’m the one that’s… extra.",
+      "next": "mc_you_not_extra_1"
+    },
+    {
+      "id": "mc_you_not_extra_1",
+      "speaker": "MC",
+      "text": "You’re not extra.",
+      "next": "mc_you_not_extra_2"
+    },
+    {
+      "id": "mc_you_not_extra_2",
+      "speaker": "MC",
+      "text": "I just suck at handling stuff and people at the same time.",
+      "next": "aiko_too_tired_question"
+    },
+    {
+      "id": "aiko_too_tired_question",
+      "speaker": "Aiko",
+      "text": "…So are you too tired to walk with me now, or…?",
+      "next": "mc_can_walk_now"
+    },
+    {
+      "id": "mc_can_walk_now",
+      "speaker": "MC",
+      "text": "No. I can walk with you.",
+      "next": "aiko_you_sure"
+    },
+    {
+      "id": "aiko_you_sure",
+      "speaker": "Aiko",
+      "text": "You sure?",
+      "next": "mc_next_time_honest"
+    },
+    {
+      "id": "mc_next_time_honest",
+      "speaker": "MC",
+      "text": "And if I really can’t next time, I’ll just say I’m tired instead of pushing you away.",
+      "next": "aiko_you_better"
+    },
+    {
+      "id": "aiko_you_better",
+      "speaker": "Aiko",
+      "text": "…You better.",
+      "next": "narrator_sigh_smile"
+    },
+    {
+      "id": "narrator_sigh_smile",
+      "speaker": "Narrator",
+      "text": "She lets out a small sigh, then smiles faintly.",
+      "next": "aiko_lets_go_late"
+    },
+    {
+      "id": "aiko_lets_go_late",
+      "speaker": "Aiko",
+      "text": "Okay. Then let’s go before we actually are late.",
+      "next": "timer_stop_2B"
+    },
+    {
+      "id": "timer_stop_2B",
+      "speaker": "TimerControl:Stop",
+      "text": "STOP_AND_RESET_TIMER",
+      "next": "good_walk_scene"
+    },
+
+    {
+      "id": "opt2C_mattered",
+      "speaker": "MC",
+      "text": "I didn’t think it mattered if we walked together or not.",
+      "next": "aiko_wow_flat"
+    },
+    {
+      "id": "aiko_wow_flat",
+      "speaker": "Aiko",
+      "text": "…Wow.",
+      "next": "narrator_voice_flat"
+    },
+    {
+      "id": "narrator_voice_flat",
+      "speaker": "Narrator",
+      "text": "(Her voice goes flat.)",
+      "next": "aiko_got_it"
+    },
+    {
+      "id": "aiko_got_it",
+      "speaker": "Aiko",
+      "text": "Got it.",
+      "next": "mc_thats_not"
+    },
+    {
+      "id": "mc_thats_not",
+      "speaker": "MC",
+      "text": "That’s not—",
+      "next": "aiko_its_fine_2_1"
+    },
+    {
+      "id": "aiko_its_fine_2_1",
+      "speaker": "Aiko",
+      "text": "It’s fine.",
+      "next": "aiko_its_fine_2_2"
+    },
+    {
+      "id": "aiko_its_fine_2_2",
+      "speaker": "Aiko",
+      "text": "Really.",
+      "next": "aiko_you_have_way"
+    },
+    {
+      "id": "aiko_you_have_way",
+      "speaker": "Aiko",
+      "text": "You have your way of thinking, I have mine.",
+      "next": "narrator_steps_back"
+    },
+    {
+      "id": "narrator_steps_back",
+      "speaker": "Narrator",
+      "text": "(She steps back, forcing a thin smile.)",
+      "next": "aiko_bad_timer_1"
+    },
+    {
+      "id": "aiko_bad_timer_1",
+      "speaker": "Aiko",
+      "text": "You don’t want to walk with me because you have other problems.",
+      "next": "aiko_bad_timer_2"
+    },
+    {
+      "id": "aiko_bad_timer_2",
+      "speaker": "Aiko",
+      "text": "See you in class then.",
+      "next": "bad_walk_scene_timer"
+    },
+    {
+      "id": "bad_walk_scene_timer",
+      "speaker": "TimerControl:Continue",
+      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING_UNTIL_ZERO",
+      "next": "END"
+    },
+
+    {
+      "id": "opt3_okay_walk",
+      "speaker": "MC",
+      "text": "Okay we can walk together.",
+      "next": "aiko_forcing"
+    },
+    {
+      "id": "aiko_forcing",
+      "speaker": "Aiko",
+      "text": "Oh so now you are just forcing yourself.",
+      "next": "mc_wait_no"
+    },
+    {
+      "id": "mc_wait_no",
+      "speaker": "MC",
+      "text": "Wait no, that’s not what I meant—",
+      "next": "aiko_then_what"
+    },
+    {
+      "id": "aiko_then_what",
+      "speaker": "Aiko",
+      "text": "Then what did you mean?",
+      "next": "opt3_followup"
+    },
+    {
+      "id": "opt3_followup",
+      "speaker": "MC",
+      "text": "",
+      "choices": [
+        {
+          "text": "I actually do want to walk with you. I just said it badly.",
+          "next": "opt3A_recover",
+          "isCorrect": true
+        },
+        {
+          "text": "I’m just trying to make you happy, okay?",
+          "next": "opt3B_good",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "opt3A_recover",
+      "speaker": "MC",
+      "text": "I actually do want to walk with you. I just said it badly.",
+      "next": "aiko_terrible_words"
+    },
+    {
+      "id": "aiko_terrible_words",
+      "speaker": "Aiko",
+      "text": "…You really are terrible with words.",
+      "next": "mc_know_panicked"
+    },
+    {
+      "id": "mc_know_panicked",
+      "speaker": "MC",
+      "text": "I know. But I’m not forcing myself. I just… panicked.",
+      "next": "aiko_okay_what_mean"
+    },
+
+    {
+      "id": "opt3B_good",
+      "speaker": "MC",
+      "text": "I’m just trying to make you happy, okay?",
+      "next": "aiko_if_didnt_complain"
+    },
+    {
+      "id": "aiko_if_didnt_complain",
+      "speaker": "Aiko",
+      "text": "So if I didn’t complain, you wouldn’t have bothered?",
+      "next": "narrator_pause"
+    },
+    {
+      "id": "narrator_pause",
+      "speaker": "Narrator",
+      "text": "Pause",
+      "next": "aiko_forget_it"
+    },
+    {
+      "id": "aiko_forget_it",
+      "speaker": "Aiko",
+      "text": "…Forget it.\nJust—",
+      "next": "narrator_hides_smile"
+    },
+    {
+      "id": "narrator_hides_smile",
+      "speaker": "Narrator",
+      "text": "She sighs and tries to hide her smile.",
+      "next": "aiko_if_coming_then_come"
+    },
+    {
+      "id": "aiko_if_coming_then_come",
+      "speaker": "Aiko",
+      "text": "If you’re coming, then come. If not, I’ll go ahead.",
+      "next": "timer_stop_3B"
+    },
+    {
+      "id": "timer_stop_3B",
+      "speaker": "TimerControl:Stop",
+      "text": "STOP_AND_RESET_TIMER",
+      "next": "good_walk_scene"
     }
   ]
 }
