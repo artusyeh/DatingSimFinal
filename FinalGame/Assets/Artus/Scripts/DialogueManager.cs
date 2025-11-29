@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public Button choiceButtonPrefab;       // Prefab for a choice button
 
     [Header("Dialogue File")]
-    public string dialogueFileName = "opening_scene"; 
+    public string dialogueFileName = "opening_scene"; // e.g. "dialogue_scene_1"
 
     [Header("Typewriter Settings")]
     public float typewriterSpeed = 0.02f;   // seconds per character
@@ -24,6 +24,9 @@ public class DialogueManager : MonoBehaviour
     public float minPitch = 0.9f;
     public float maxPitch = 1.1f;
     public int charsPerSound = 2;          // play sound every X characters
+
+    [Header("Timer")]
+    public TimerScript timerScript;
 
     private DialogueRoot dialogueRoot;
     private Dictionary<string, DialogueNode> nodeLookup;
@@ -38,9 +41,6 @@ public class DialogueManager : MonoBehaviour
     private string fullText = "";
     private Coroutine typingCoroutine;
 
-    //timer inspector
-    public TimerScript timerScript;
-
     void Start()
     {
         LoadDialogue();
@@ -52,12 +52,10 @@ public class DialogueManager : MonoBehaviour
         // Left-click behavior
         if (Input.GetMouseButtonDown(0))
         {
-
             if (isTyping)
             {
                 FinishTypingInstantly();
             }
-
             else if (waitingForClick && !string.IsNullOrEmpty(nextNodeOnClick))
             {
                 waitingForClick = false;
@@ -70,7 +68,7 @@ public class DialogueManager : MonoBehaviour
 
     void LoadDialogue()
     {
-        // JSON should be at: Assets/Dialogue/Resources/opening_scene.json
+        // JSON should be at: Assets/Resources/<dialogueFileName>.json
         TextAsset jsonAsset = Resources.Load<TextAsset>(dialogueFileName);
         if (jsonAsset == null)
         {
@@ -134,7 +132,26 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log("GoToNode: " + nodeId);
 
-        // Update speaker
+        // Handle special timer control nodes BEFORE any UI
+        if (!string.IsNullOrEmpty(currentNode.speaker) &&
+            currentNode.speaker.StartsWith("TimerControl"))
+        {
+            HandleTimerControlNode(currentNode);
+
+            // Immediately jump to the next node, no UI for this control node
+            if (!string.IsNullOrEmpty(currentNode.next))
+            {
+                GoToNode(currentNode.next);
+                return;
+            }
+            else
+            {
+                Debug.LogWarning("TimerControl node has no next: " + currentNode.id);
+                return;
+            }
+        }
+
+        // Normal speaker
         if (speakerText != null)
             speakerText.text = currentNode.speaker;
 
@@ -143,12 +160,31 @@ public class DialogueManager : MonoBehaviour
 
         // Start typewriter effect for this node's text
         StartTyping(currentNode.text);
+    }
 
-         if(nodeId == "ending_good")
-         {
-          if (timerScript != null)
-          timerScript.StopTimer();
-         }
+    /// <summary>
+    /// Reacts to special nodes that control the timer.
+    /// Uses the "speaker" field as a control string:
+    /// - "TimerControl:Stop" -> stop and reset timer + positive heart FX
+    /// - "TimerControl:Continue" -> start/continue timer without resetting
+    /// </summary>
+    void HandleTimerControlNode(DialogueNode node)
+    {
+        if (timerScript == null) return;
+
+        if (node.speaker == "TimerControl:Stop")
+        {
+            // Stop and reset timer, then play positive heart FX
+            timerScript.ResetTimer();
+            timerScript.PlayHeartFX();
+            Debug.Log("TimerControl:Stop processed at node " + node.id);
+        }
+        else if (node.speaker == "TimerControl:Continue")
+        {
+            // Ensure timer is running, but don't reset or replay heartbreak here
+            timerScript.StartTimer(false);
+            Debug.Log("TimerControl:Continue processed at node " + node.id);
+        }
     }
 
     // TYPEWRITER LOGIC
@@ -246,9 +282,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
     // CHOICES UI
-
 
     void ClearChoices()
     {
@@ -283,29 +317,25 @@ public class DialogueManager : MonoBehaviour
 
         btn.onClick.AddListener(() =>
         {
-            //GoToNode(choice.next);
             HandleChoiceSelection(choice);
         });
 
         Debug.Log("Created choice button: " + choice.text + " > " + choice.next);
     }
+
     void HandleChoiceSelection(Choice choice)
     {
+        // Wrong answers: start/continue timer + heartbreak FX
         if (!choice.isCorrect)
         {
             if (timerScript != null)
-                timerScript.StartTimer();
+            {
+                timerScript.StartTimer(false);   // don't reset, just run
+                timerScript.PlayHeartbreakFX();  // explicit heartbreak FX
+            }
         }
 
         GoToNode(choice.next);
         ClearChoices();
-
-        if (choice.next == "ending_good")
-        {
-            if (timerScript != null)
-                timerScript.StopTimer();
-        }
     }
 }
-
-

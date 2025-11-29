@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
@@ -23,34 +24,75 @@ public class TimerScript : MonoBehaviour
     {
         if (playAgainPanel != null)
             playAgainPanel.SetActive(false);
-        
+
         remainingTime = startingTime;
         enabled = false;
     }
 
+    /// <summary>
+    /// Start or resume the timer.
+    /// If reset == true, reset remaining time to startingTime.
+    /// Does NOT play any FX by itself.
+    /// </summary>
     public void StartTimer(bool reset = false)
     {
         if (reset)
             remainingTime = startingTime;
 
         enabled = true;
+    }
 
-        if (heartBreakparticles != null) 
+    /// <summary>
+    /// Stop counting down; do NOT change remaining time.
+    /// Also stop blinking and reset text color.
+    /// Does NOT play any FX by itself.
+    /// </summary>
+    public void StopTimer()
+    {
+        enabled = false;
+        isBlinking = false;
+        if (timerText != null)
+            timerText.color = Color.white;
+
+        StopAllCoroutines();
+    }
+
+    /// <summary>
+    /// Fully reset timer to starting value and stop it.
+    /// </summary>
+    public void ResetTimer()
+    {
+        remainingTime = startingTime;
+        StopTimer();
+    }
+
+    /// <summary>
+    /// Play heartbreak FX (bad outcome / wrong choice).
+    /// Explicitly stops heartParticles first.
+    /// </summary>
+    public void PlayHeartbreakFX()
+    {
+        if (heartParticles != null)
+            heartParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        if (heartBreakparticles != null)
             heartBreakparticles.Play();
-       
+
         if (audioSource != null && heartbreakClip != null)
             audioSource.PlayOneShot(heartbreakClip);
 
         // if (screenShake != null)
-        // StartCoroutine(screenShake.Shaking());
+        //     StartCoroutine(screenShake.Shaking());
     }
-    public void StopTimer()
-    {
-        enabled = false;              
-        isBlinking = false;           
-        timerText.color = Color.white;
 
-        StopAllCoroutines();
+    /// <summary>
+    /// Play positive heart FX (good outcome / reconciliation).
+    /// Explicitly stops heartbreakParticles first.
+    /// </summary>
+    public void PlayHeartFX()
+    {
+        if (heartBreakparticles != null)
+            heartBreakparticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
         if (heartParticles != null)
             heartParticles.Play();
@@ -79,7 +121,8 @@ public class TimerScript : MonoBehaviour
 
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (timerText != null)
+            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
         if (remainingTime <= 10)
         {
@@ -98,12 +141,12 @@ public class TimerScript : MonoBehaviour
     {
         enabled = false;
         isBlinking = false;
-        timerText.color = Color.white;
+        if (timerText != null)
+            timerText.color = Color.white;
 
         if (playAgainPanel != null)
             playAgainPanel.SetActive(true);
     }
-        
 
     public void RestartScene()
     {
@@ -114,34 +157,12 @@ public class TimerScript : MonoBehaviour
     {
         while (remainingTime > 0 && remainingTime <= 10)
         {
-            timerText.color = Color.red;
+            if (timerText != null)
+                timerText.color = Color.red;
             yield return new WaitForSeconds(0.5f);
-            timerText.color = Color.white;
+            if (timerText != null)
+                timerText.color = Color.white;
             yield return new WaitForSeconds(0.5f);
         }
     }
-
-  /*  public void OnNoButtonClick()
-    {
-        remainingTime -= 5f;
-        if (remainingTime < 0) remainingTime = 0;
-
-        if (heartBreakparticles != null)
-        {
-            heartBreakparticles.Play();
-        }
-
-        if (screenShake != null)
-        {
-            StartCoroutine(screenShake.Shaking());
-        }
-       
-        HideButtons();
-        
-    }
-    public void HideButtons()
-    {
-        if (yesButton != null) yesButton.gameObject.SetActive(false);
-        if (noButton != null) noButton.gameObject.SetActive(false);
-    }*/
 }
