@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] GameObject timerBox;
     [SerializeField] float startingTime = 60f;
     [SerializeField] GameObject playAgainPanel;
     [SerializeField] ParticleSystem heartBreakparticles;
     [SerializeField] ParticleSystem heartParticles;
-    [SerializeField] ScreenShake screenShake;
+    [SerializeField] TestScreenShake screenShake;
+
+    [Header("Audio")]
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip tickClip;
+    [SerializeField] AudioClip urgentTickClip;
     [SerializeField] AudioClip heartClip;
     [SerializeField] AudioClip heartbreakClip;
+  //  [SerializeField] AudioSource bgmSource;
+   // [SerializeField] AudioClip normalTickClip;
 
     private float remainingTime;
     private int lastSecond = -1;
@@ -27,6 +32,15 @@ public class TimerScript : MonoBehaviour
 
         remainingTime = startingTime;
         enabled = false;
+
+        if (timerText != null)
+        {
+            timerText.gameObject.SetActive(false);
+        }
+        if (timerBox != null)
+        {
+            timerBox.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -40,6 +54,14 @@ public class TimerScript : MonoBehaviour
             remainingTime = startingTime;
 
         enabled = true;
+        if (timerText != null)
+        {
+            timerText.gameObject.SetActive(true);
+        }
+        if (timerBox != null)
+        {
+            timerBox.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -52,9 +74,15 @@ public class TimerScript : MonoBehaviour
         enabled = false;
         isBlinking = false;
         if (timerText != null)
+        {
             timerText.color = Color.white;
-
-        StopAllCoroutines();
+            timerText.gameObject.SetActive(false);
+        }
+        if (timerBox != null)
+        {
+            timerBox.gameObject.SetActive(false);
+            StopAllCoroutines();
+        }
     }
 
     /// <summary>
@@ -81,8 +109,8 @@ public class TimerScript : MonoBehaviour
         if (audioSource != null && heartbreakClip != null)
             audioSource.PlayOneShot(heartbreakClip);
 
-        // if (screenShake != null)
-        //     StartCoroutine(screenShake.Shaking());
+        if (screenShake != null)
+            screenShake.Shake();
     }
 
     /// <summary>
@@ -103,6 +131,11 @@ public class TimerScript : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            screenShake.Shake(0.5f, 0.5f);
+        }
+
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
@@ -120,24 +153,30 @@ public class TimerScript : MonoBehaviour
         }
 
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
-        int seconds = Mathf.FloorToInt(remainingTime % 60f);
+        int seconds = Mathf.CeilToInt(remainingTime % 60f);
         if (timerText != null)
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        if (remainingTime <= 10)
+        if (seconds != lastSecond)
         {
-            if (seconds != lastSecond)
+            lastSecond = seconds;
+
+            if (audioSource != null && urgentTickClip != null)
             {
-                lastSecond = seconds;
-                if (audioSource != null && tickClip != null)
+                audioSource.pitch = 1.1f;
+
+                if (remainingTime <= 10f)
                 {
-                    audioSource.PlayOneShot(tickClip);
+                    audioSource.pitch = 0.5f;
                 }
+
+                audioSource.PlayOneShot(urgentTickClip);
             }
         }
     }
 
-    void EndGame()
+
+        void EndGame()
     {
         enabled = false;
         isBlinking = false;

@@ -41,6 +41,9 @@ public class DialogueManager : MonoBehaviour
     private string fullText = "";
     private Coroutine typingCoroutine;
 
+    // BGM Source
+    [SerializeField] AudioSource bgmSource;
+
     void Start()
     {
         LoadDialogue();
@@ -330,9 +333,11 @@ public class DialogueManager : MonoBehaviour
         {
             if (timerScript != null)
             {
-                timerScript.StartTimer(false);   // don't reset, just run
-                timerScript.PlayHeartbreakFX();  // explicit heartbreak FX
+                timerScript.StartTimer(false);   
+                timerScript.PlayHeartbreakFX();  
             }
+            if (bgmSource != null)
+                bgmSource.Stop();
         }
 
         GoToNode(choice.next);
