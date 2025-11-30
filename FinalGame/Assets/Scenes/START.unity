@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 1678503363}
   - component: {fileID: 1678503362}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Video Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678503361}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 64b00c5abf56a974c97c4daf563382ab, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a8bfc9dbe1aae5947b769534ad512cb3, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1307471487}
@@ -377,7 +377,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 0.07
+  - 0.166
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
