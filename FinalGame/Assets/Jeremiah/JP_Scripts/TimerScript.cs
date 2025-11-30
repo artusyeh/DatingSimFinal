@@ -110,7 +110,7 @@ public class TimerScript : MonoBehaviour
             audioSource.PlayOneShot(heartbreakClip);
 
         if (screenShake != null)
-            screenShake.Shake();
+            screenShake.ShakeBad();
     }
 
     /// <summary>
@@ -127,15 +127,13 @@ public class TimerScript : MonoBehaviour
 
         if (audioSource != null && heartClip != null)
             audioSource.PlayOneShot(heartClip);
+
+        if (screenShake != null)
+            screenShake.ShakeGood();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            screenShake.Shake(0.5f, 0.5f);
-        }
-
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
