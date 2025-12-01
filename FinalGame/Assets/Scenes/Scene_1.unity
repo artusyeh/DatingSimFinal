@@ -2882,6 +2882,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5113032516073756687, guid: dfa7267704894064988f5603ef8d75fc, type: 3}
     - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: aiko_neutral2
+      value: 
+      objectReference: {fileID: 2311178877110563303, guid: 1dbcac79dfae0cf4d9b6de3d1dfeb3ee, type: 3}
+    - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1644592229}

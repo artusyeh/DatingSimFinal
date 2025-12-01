@@ -51,7 +51,7 @@
     {
       "id": "aiko_picture",
       "speaker": "Aiko",
-      "expression": "happy2",
+      "expression": "smug",
       "text": "Oh really? Should I show you the picture?",
       "next": "mc_show_what"
     },
@@ -157,6 +157,7 @@
     {
       "id": "good_walk_scene",
       "speaker": "Narrator",
+      "expression": "happy",
       "text": "You fall into step beside Aiko as you both head toward the next lecture.",
       "next": "END"
     },
@@ -164,6 +165,7 @@
     {
       "id": "branch_no_walk",
       "speaker": "MC",
+      "expression": "shocked",
       "text": "I think I’ll go on my own.",
       "next": "timer_continue_start"
     },
