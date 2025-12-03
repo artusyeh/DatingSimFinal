@@ -27,10 +27,10 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            LoadNextLevel();
-        }
+       // if(Input.GetKey(KeyCode.Space))
+        //{
+          //  LoadNextLevel();
+        //}
     }
 
     public void LoadNextLevel()
