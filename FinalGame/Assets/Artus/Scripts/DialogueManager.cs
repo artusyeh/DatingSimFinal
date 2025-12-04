@@ -12,6 +12,12 @@ public class DialogueManager : MonoBehaviour
     public Transform choicesContainer;      // Vertical Layout Group
     public Button choiceButtonPrefab;       // Prefab for a choice button
 
+    [Header("Dialogue Box Sprites")]
+    [SerializeField] Image dialogueBoxImage;   
+    [SerializeField] Sprite mcBoxSprite;       
+    [SerializeField] Sprite aikoBoxSprite;
+
+
     [Header("Dialogue File")]
     public string dialogueFileName = "opening_scene"; // e.g. "dialogue_scene_1"
 
@@ -167,6 +173,24 @@ public class DialogueManager : MonoBehaviour
         // Normal speaker
         if (speakerText != null)
             speakerText.text = currentNode.speaker;
+
+        if (dialogueBoxImage != null)
+        {
+            switch (currentNode.speaker)
+            {
+                case "You":
+                case "MC":
+                    dialogueBoxImage.sprite = mcBoxSprite;
+                    break;
+                case "Aiko":
+                    dialogueBoxImage.sprite = aikoBoxSprite;
+                    break;
+                default:
+                  
+                    dialogueBoxImage.sprite = mcBoxSprite;
+                    break;
+            }
+        }
 
         // Clear choices for new node
         ClearChoices();

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1ae7ce7ded72e61429ab746980e1a152
+guid: b2a1b6d11def97745913969802538359
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8104225245824156943
-    second: Timer Box (2)_0
+      213: -327818743068282864
+    second: DialogueBox (3)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Timer Box (2)_0
+      name: DialogueBox (3)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 15
-        width: 181
-        height: 65
+        x: 5
+        y: 0
+        width: 1585
+        height: 343
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1faf5e2b312088f80800000000000000
-      internalID: -8104225245824156943
+      spriteID: 01033bc079a537bf0800000000000000
+      internalID: -327818743068282864
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Timer Box (2)_0: -8104225245824156943
+      DialogueBox (3)_0: -327818743068282864
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
