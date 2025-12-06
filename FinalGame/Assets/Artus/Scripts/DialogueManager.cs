@@ -60,6 +60,7 @@ public class DialogueManager : MonoBehaviour
 
     // Scene Transition
     [SerializeField] NonVideoSceneTransitions sceneTransition;
+    [SerializeField] Transform faceTarget;
 
 
 
@@ -304,58 +305,64 @@ public class DialogueManager : MonoBehaviour
 
     void OnTypingComplete()
     {
-            int choiceCount = 0;
-            if (currentNode.choices != null)
+        int choiceCount = 0;
+        if (currentNode.choices != null)
+        {
+            choiceCount = currentNode.choices.Length;
+        }
+
+        Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
+
+        if (choiceCount > 0)
+        {
+            foreach (var choice in currentNode.choices)
             {
-                choiceCount = currentNode.choices.Length;
+                CreateChoiceButton(choice);
             }
-
-            Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
-
-            if (choiceCount > 0)
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(currentNode.next))
             {
-                foreach (var choice in currentNode.choices)
+                if (currentNode.id == "aiko_dont_be_late")
                 {
-                    CreateChoiceButton(choice);
+                    if (zoomInScript != null && faceTarget != null)
+                    {
+                        Vector3 targetPos = faceTarget.position + new Vector3(0f, 0f, -10f);
+                        zoomInScript.StartZoomAndPan(3f, 8f, targetPos, 3f);
+                    }
+                }
+
+                if (currentNode.next == "END")
+                {
+                    if (sceneTransition != null)
+                        sceneTransition.LoadNextScene();
+                }
+                else
+                {
+                    waitingForClick = true;
+                    nextNodeOnClick = currentNode.next;
                 }
             }
             else
             {
-                if (!string.IsNullOrEmpty(currentNode.next))
+                if (currentNode.speaker == "TimerControl:ForceEnd" || currentNode.forceTimerEnd)
                 {
-                    if (currentNode.id == "aiko_dont_be_late")
+                    if (zoomInScript != null && faceTarget != null)
                     {
-                        if (zoomInScript != null)
-                            zoomInScript.StartZoom(2f, 3f); // zoom to size 2 over 3 seconds
-                    }
-
-                    if (currentNode.next == "END")
-                    {
-                        if (sceneTransition != null)
-                            sceneTransition.LoadNextScene();
-                    }
-                    else
-                    {
-                        // Normal continue
-                        waitingForClick = true;
-                        nextNodeOnClick = currentNode.next;
+                        Vector3 targetPos = faceTarget.position + new Vector3(0f, 0f, -10f);
+                        zoomInScript.StartZoomAndPan(4f, 10f, targetPos, 3f);
                     }
                 }
                 else
                 {
-                    if (currentNode.speaker == "TimerControl:ForceEnd" || currentNode.forceTimerEnd)
-                    {
-                        if (zoomInScript != null)
-                            zoomInScript.StartZoom(2f, 10f);
-                    }
-                    else
-                    {
-                        if (sceneTransition != null)
-                            sceneTransition.LoadNextScene();
-                    }
+                    if (sceneTransition != null)
+                        sceneTransition.LoadNextScene();
                 }
             }
         }
+    }
+        
 
     // CHOICES UI
 
