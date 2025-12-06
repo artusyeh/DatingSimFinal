@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI References")]
@@ -34,6 +35,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Timer")]
     public TimerScript timerScript;
 
+
     // Aiko character reference for expression changes
     [Header("Aiko Character")]
     public AikoCharacter aikoCharacter;
@@ -51,8 +53,14 @@ public class DialogueManager : MonoBehaviour
     private string fullText = "";
     private Coroutine typingCoroutine;
 
+    [Header("BGM + Transition")]
     // BGM Source
     [SerializeField] AudioSource bgmSource;
+
+    // Scene Transition
+    [SerializeField] NonVideoSceneTransitions sceneTransition;
+
+
 
     void Start()
     {
@@ -210,16 +218,19 @@ public class DialogueManager : MonoBehaviour
 
         if (node.speaker == "TimerControl:Stop")
         {
-            // Stop and reset timer, then play positive heart FX
             timerScript.ResetTimer();
             timerScript.PlayHeartFX();
             Debug.Log("TimerControl:Stop processed at node " + node.id);
         }
         else if (node.speaker == "TimerControl:Continue")
         {
-            // Ensure timer is running, but don't reset or replay heartbreak here
             timerScript.StartTimer(false);
             Debug.Log("TimerControl:Continue processed at node " + node.id);
+        }
+        else if (node.speaker == "TimerControl:ForceEnd")
+        { 
+            timerScript.ForceEndTimer();
+            Debug.Log("TimerControl:ForceEnd processed at node " + node.id);
         }
     }
 
@@ -313,7 +324,15 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Dialogue ended at node: " + currentNode.id);
+
+                if (currentNode.forceTimerEnd && timerScript != null)
+                {
+                    Debug.Log("ForceTimerEnd triggered at node: " + currentNode.id);
+                    timerScript.ForceEndTimer();
+                }
+
+                if (sceneTransition != null)
+                    sceneTransition.LoadNextScene();
             }
         }
     }
@@ -367,7 +386,9 @@ public class DialogueManager : MonoBehaviour
             if (timerScript != null)
             {
                 timerScript.StartTimer(false);   
-                timerScript.PlayHeartbreakFX();  
+                timerScript.PlayHeartbreakFX();
+
+                timerScript.DeductTime(5f);
             }
             if (bgmSource != null)
                 bgmSource.Stop();
