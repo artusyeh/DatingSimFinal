@@ -1245,6 +1245,7 @@ MonoBehaviour:
   maxPitch: 1.46
   charsPerSound: 2
   timerScript: {fileID: 2092892962}
+  zoomInScript: {fileID: 0}
   aikoCharacter: {fileID: 1644592230}
   bgmSource: {fileID: 1738840020}
   sceneTransition: {fileID: 1850282630}
@@ -1427,7 +1428,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -0.01, z: 0.032366}
-  m_LocalScale: {x: 1.0486797, y: 1.0486797, z: 1.0486797}
+  m_LocalScale: {x: 1.0154691, y: 1.0154691, z: 1.0154691}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1490,7 +1491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9123703121967069668, guid: 6f7eaaf8463a5234db85530df0864165, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

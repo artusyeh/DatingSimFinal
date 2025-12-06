@@ -340,8 +340,8 @@
     {
       "id": "bad_walk_scene_lock",
       "speaker": "TimerControl:ForceEnd",
-      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING",
-      "forceTimerEnd": true
+      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING"
+      
     },
 
     {

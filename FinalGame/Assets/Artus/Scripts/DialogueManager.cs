@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Timer")]
     public TimerScript timerScript;
+    [SerializeField] ZoomIn zoomInScript;
 
 
     // Aiko character reference for expression changes
@@ -227,9 +228,9 @@ public class DialogueManager : MonoBehaviour
             timerScript.StartTimer(false);
             Debug.Log("TimerControl:Continue processed at node " + node.id);
         }
-        else if (node.speaker == "TimerControl:ForceEnd")
+      //  else if (node.speaker == "TimerControl:ForceEnd")
         { 
-            timerScript.ForceEndTimer();
+            //timerScript.ForceEndTimer();
             Debug.Log("TimerControl:ForceEnd processed at node " + node.id);
         }
     }
@@ -303,39 +304,58 @@ public class DialogueManager : MonoBehaviour
 
     void OnTypingComplete()
     {
-        int choiceCount = (currentNode.choices == null) ? 0 : currentNode.choices.Length;
-        Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
-
-        if (choiceCount > 0)
-        {
-            // Create choice buttons
-            foreach (var choice in currentNode.choices)
+            int choiceCount = 0;
+            if (currentNode.choices != null)
             {
-                CreateChoiceButton(choice);
+                choiceCount = currentNode.choices.Length;
             }
-        }
-        else
-        {
-            // No choices: enable click-to-continue if there is a next node
-            if (!string.IsNullOrEmpty(currentNode.next))
+
+            Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
+
+            if (choiceCount > 0)
             {
-                waitingForClick = true;
-                nextNodeOnClick = currentNode.next;
+                foreach (var choice in currentNode.choices)
+                {
+                    CreateChoiceButton(choice);
+                }
             }
             else
             {
-
-                if (currentNode.forceTimerEnd && timerScript != null)
+                if (!string.IsNullOrEmpty(currentNode.next))
                 {
-                    Debug.Log("ForceTimerEnd triggered at node: " + currentNode.id);
-                    timerScript.ForceEndTimer();
-                }
+                    if (currentNode.id == "aiko_dont_be_late")
+                    {
+                        if (zoomInScript != null)
+                            zoomInScript.StartZoom(2f, 3f); // zoom to size 2 over 3 seconds
+                    }
 
-                if (sceneTransition != null)
-                    sceneTransition.LoadNextScene();
+                    if (currentNode.next == "END")
+                    {
+                        if (sceneTransition != null)
+                            sceneTransition.LoadNextScene();
+                    }
+                    else
+                    {
+                        // Normal continue
+                        waitingForClick = true;
+                        nextNodeOnClick = currentNode.next;
+                    }
+                }
+                else
+                {
+                    if (currentNode.speaker == "TimerControl:ForceEnd" || currentNode.forceTimerEnd)
+                    {
+                        if (zoomInScript != null)
+                            zoomInScript.StartZoom(2f, 10f);
+                    }
+                    else
+                    {
+                        if (sceneTransition != null)
+                            sceneTransition.LoadNextScene();
+                    }
+                }
             }
         }
-    }
 
     // CHOICES UI
 

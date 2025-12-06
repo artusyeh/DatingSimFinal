@@ -383,7 +383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -21.900024, y: -130.86996}
+  m_AnchoredPosition: {x: -21.900024, y: -130.86998}
   m_SizeDelta: {x: -224.77, y: -329.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &136111309
@@ -1245,6 +1245,7 @@ MonoBehaviour:
   maxPitch: 1.46
   charsPerSound: 2
   timerScript: {fileID: 2092892962}
+  zoomInScript: {fileID: 1307471491}
   aikoCharacter: {fileID: 1644592230}
   bgmSource: {fileID: 1738840020}
   sceneTransition: {fileID: 1850282630}
@@ -1426,7 +1427,7 @@ Transform:
   m_GameObject: {fileID: 1243265661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.01, z: 0.032366}
+  m_LocalPosition: {x: -0, y: -0.85, z: 0.032366}
   m_LocalScale: {x: 0.5365188, y: 0.5365188, z: 0.5365188}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1515,6 +1516,7 @@ GameObject:
   - component: {fileID: 1307471486}
   - component: {fileID: 1307471489}
   - component: {fileID: 1307471490}
+  - component: {fileID: 1307471491}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1590,7 +1592,7 @@ Transform:
   m_GameObject: {fileID: 1307471485}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -0.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1647,7 +1649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307471485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b5d3c1a6a1a60d48a4195bffbca2357, type: 3}
   m_Name: 
@@ -1656,6 +1658,19 @@ MonoBehaviour:
   goodMagnitude: 0.1
   badDuration: 0.65
   badMagnitude: 0.4
+--- !u!114 &1307471491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307471485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c68665370d92b4d8ae361c6a89cae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1307471487}
 --- !u!1 &1431581936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,7 +2960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7002307
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_LocalPosition.z
