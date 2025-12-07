@@ -1,11 +1,17 @@
 using System.Collections;
 using Unity.Mathematics;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static UnityEditorInternal.ReorderableList;
 
 public class ZoomIn : MonoBehaviour
 {
     [SerializeField] Camera cam;
+    [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject speakerText;
+    [SerializeField] GameObject bodyText;
+    [SerializeField] GameObject timerText;
+    [SerializeField] GameObject timerSprite;
 
     private float defaultZoom;
     private Vector3 defaultPos;
@@ -43,6 +49,13 @@ public class ZoomIn : MonoBehaviour
     IEnumerator LerpZoomAndPan(float startZoom, float endZoom, float duration,
                                Vector3 startPos, Vector3 endPos, float holdTime)
     {
+
+        if (dialogueBox != null) dialogueBox.SetActive(false);
+        if (speakerText != null) speakerText.SetActive(false);
+        if (bodyText != null) bodyText.SetActive(false);
+        if (timerText != null) timerText.SetActive(false);
+        if (timerSprite != null) timerSprite.SetActive(false);
+
         float t = 0;
         while (t < duration)
         {
@@ -69,6 +82,11 @@ public class ZoomIn : MonoBehaviour
 
             yield return null;
         }
+        if (dialogueBox != null) dialogueBox.SetActive(true);
+        if (speakerText != null) speakerText.SetActive(true);
+        if (bodyText != null) bodyText.SetActive(true);
+        if (timerText != null) timerText.SetActive(true);
+        if (timerSprite != null) timerSprite.SetActive(true);
     }
 }
 

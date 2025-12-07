@@ -351,7 +351,7 @@ public class DialogueManager : MonoBehaviour
                     if (zoomInScript != null && faceTarget != null)
                     {
                         Vector3 targetPos = faceTarget.position + new Vector3(0f, 0f, -10f);
-                        zoomInScript.StartZoomAndPan(4f, 10f, targetPos, 3f);
+                        zoomInScript.StartZoomAndPan(4f, 8f, targetPos, 3f);
                     }
                 }
                 else

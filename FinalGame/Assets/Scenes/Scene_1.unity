@@ -1428,7 +1428,7 @@ Transform:
   m_GameObject: {fileID: 1243265661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.85, z: 0.032366}
+  m_LocalPosition: {x: -0, y: -1.02, z: 0.032366}
   m_LocalScale: {x: 0.5365188, y: 0.5365188, z: 0.5365188}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1672,6 +1672,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1307471487}
+  dialogueBox: {fileID: 136111307}
+  speakerText: {fileID: 362010367}
+  bodyText: {fileID: 1820264332}
+  timerText: {fileID: 1649392407}
+  timerSprite: {fileID: 1190854951}
 --- !u!1 &1431581936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,7 +1893,7 @@ Transform:
   m_GameObject: {fileID: 1574960127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.28, y: 0.82, z: -69.2}
+  m_LocalPosition: {x: -0.1, y: 0.76, z: -69.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2346,6 +2351,11 @@ MonoBehaviour:
   bounceHeight: 0.25
   bounceDuration: 0.2
   bounceCount: 2
+--- !u!1 &1649392407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5211827667022115065, guid: f2d120bee7bd93045b8f6f4006d75896, type: 3}
+  m_PrefabInstance: {fileID: 1596143546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1738840018
 GameObject:
   m_ObjectHideFlags: 0
