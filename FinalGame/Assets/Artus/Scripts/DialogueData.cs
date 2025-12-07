@@ -7,6 +7,7 @@ public class Choice
     public string text;
     public string next;   // id of the next node
     public bool isCorrect;
+    
 }
 
 [Serializable]
@@ -17,9 +18,12 @@ public class DialogueNode
     [TextArea] public string text;
     public Choice[] choices;  // null or empty if this is a linear node
     public string next;       // used if there are NO choices
+ 
 
     // NEW: expression field
     public string expression;
+
+    public bool forceTimerEnd;
 
 }
 

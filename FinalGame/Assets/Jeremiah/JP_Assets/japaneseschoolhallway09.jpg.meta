@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 75b4336e7a89332469b96b84d1496e02
+guid: e0007eda719f93c45a9dfc19688868f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7304950855530800328
-    second: NewFIeld_0
+      213: 5402174233390583094
+    second: japaneseschoolhallway09_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NewFIeld_0
+      name: japaneseschoolhallway09_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 0
-        width: 1585
-        height: 343
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83b966276e99f9a90800000000000000
-      internalID: -7304950855530800328
+      spriteID: 63d8304e7d068fa40800000000000000
+      internalID: 5402174233390583094
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      NewFIeld_0: -7304950855530800328
+      japaneseschoolhallway09_0: 5402174233390583094
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

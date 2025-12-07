@@ -158,8 +158,8 @@
       "id": "good_walk_scene",
       "speaker": "Narrator",
       "expression": "happy",
-      "text": "You fall into step beside Aiko as you both head toward the next lecture.",
-      "next": "END"
+      "text": "You fall into step beside Aiko as you both head toward the next lecture."
+     
     },
 
     {
@@ -340,9 +340,9 @@
     },
     {
       "id": "bad_walk_scene_lock",
-      "speaker": "TimerControl:Continue",
-      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING",
-      "next": "END"
+      "speaker": "TimerControl:ForceEnd",
+      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING"
+      
     },
 
     {

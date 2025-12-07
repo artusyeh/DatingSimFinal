@@ -132,6 +132,19 @@ public class TimerScript : MonoBehaviour
             screenShake.ShakeGood();
     }
 
+  public  void DeductTime(float seconds)
+    {
+        remainingTime -= seconds;
+        if (remainingTime < 0)
+            remainingTime = 0;
+    }
+
+    public void ForceEndTimer()
+    {
+        remainingTime = 0;
+        EndGame();   
+    }
+
     void Update()
     {
         if (remainingTime > 0)
@@ -183,6 +196,9 @@ public class TimerScript : MonoBehaviour
 
         if (playAgainPanel != null)
             playAgainPanel.SetActive(true);
+
+        DialogueManager dm = Object.FindFirstObjectByType<DialogueManager>();
+        if (dm != null) dm.enabled = false;
     }
 
     public void RestartScene()

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI References")]
@@ -11,6 +12,12 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text bodyText;
     public Transform choicesContainer;      // Vertical Layout Group
     public Button choiceButtonPrefab;       // Prefab for a choice button
+
+    [Header("Dialogue Box Sprites")]
+    [SerializeField] Image dialogueBoxImage;   
+    [SerializeField] Sprite mcBoxSprite;       
+    [SerializeField] Sprite aikoBoxSprite;
+
 
     [Header("Dialogue File")]
     public string dialogueFileName = "opening_scene"; // e.g. "dialogue_scene_1"
@@ -27,6 +34,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Timer")]
     public TimerScript timerScript;
+    [SerializeField] ZoomIn zoomInScript;
+
 
     // Aiko character reference for expression changes
     [Header("Aiko Character")]
@@ -45,8 +54,15 @@ public class DialogueManager : MonoBehaviour
     private string fullText = "";
     private Coroutine typingCoroutine;
 
+    [Header("BGM + Transition")]
     // BGM Source
     [SerializeField] AudioSource bgmSource;
+
+    // Scene Transition
+    [SerializeField] NonVideoSceneTransitions sceneTransition;
+    [SerializeField] Transform faceTarget;
+
+
 
     void Start()
     {
@@ -168,6 +184,24 @@ public class DialogueManager : MonoBehaviour
         if (speakerText != null)
             speakerText.text = currentNode.speaker;
 
+        if (dialogueBoxImage != null)
+        {
+            switch (currentNode.speaker)
+            {
+                case "You":
+                case "MC":
+                    dialogueBoxImage.sprite = mcBoxSprite;
+                    break;
+                case "Aiko":
+                    dialogueBoxImage.sprite = aikoBoxSprite;
+                    break;
+                default:
+                  
+                    dialogueBoxImage.sprite = mcBoxSprite;
+                    break;
+            }
+        }
+
         // Clear choices for new node
         ClearChoices();
 
@@ -186,16 +220,19 @@ public class DialogueManager : MonoBehaviour
 
         if (node.speaker == "TimerControl:Stop")
         {
-            // Stop and reset timer, then play positive heart FX
             timerScript.ResetTimer();
             timerScript.PlayHeartFX();
             Debug.Log("TimerControl:Stop processed at node " + node.id);
         }
         else if (node.speaker == "TimerControl:Continue")
         {
-            // Ensure timer is running, but don't reset or replay heartbreak here
             timerScript.StartTimer(false);
             Debug.Log("TimerControl:Continue processed at node " + node.id);
+        }
+      //  else if (node.speaker == "TimerControl:ForceEnd")
+        { 
+            //timerScript.ForceEndTimer();
+            Debug.Log("TimerControl:ForceEnd processed at node " + node.id);
         }
     }
 
@@ -268,12 +305,16 @@ public class DialogueManager : MonoBehaviour
 
     void OnTypingComplete()
     {
-        int choiceCount = (currentNode.choices == null) ? 0 : currentNode.choices.Length;
+        int choiceCount = 0;
+        if (currentNode.choices != null)
+        {
+            choiceCount = currentNode.choices.Length;
+        }
+
         Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
 
         if (choiceCount > 0)
         {
-            // Create choice buttons
             foreach (var choice in currentNode.choices)
             {
                 CreateChoiceButton(choice);
@@ -281,18 +322,47 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // No choices: enable click-to-continue if there is a next node
             if (!string.IsNullOrEmpty(currentNode.next))
             {
-                waitingForClick = true;
-                nextNodeOnClick = currentNode.next;
+                if (currentNode.id == "aiko_dont_be_late")
+                {
+                    if (zoomInScript != null && faceTarget != null)
+                    {
+                        Vector3 targetPos = faceTarget.position + new Vector3(0f, 0f, -10f);
+                        zoomInScript.StartZoomAndPan(3f, 8f, targetPos, 3f);
+                    }
+                }
+
+                if (currentNode.next == "END")
+                {
+                    if (sceneTransition != null)
+                        sceneTransition.LoadNextScene();
+                }
+                else
+                {
+                    waitingForClick = true;
+                    nextNodeOnClick = currentNode.next;
+                }
             }
             else
             {
-                Debug.Log("Dialogue ended at node: " + currentNode.id);
+                if (currentNode.speaker == "TimerControl:ForceEnd" || currentNode.forceTimerEnd)
+                {
+                    if (zoomInScript != null && faceTarget != null)
+                    {
+                        Vector3 targetPos = faceTarget.position + new Vector3(0f, 0f, -10f);
+                        zoomInScript.StartZoomAndPan(4f, 10f, targetPos, 3f);
+                    }
+                }
+                else
+                {
+                    if (sceneTransition != null)
+                        sceneTransition.LoadNextScene();
+                }
             }
         }
     }
+        
 
     // CHOICES UI
 
@@ -343,7 +413,9 @@ public class DialogueManager : MonoBehaviour
             if (timerScript != null)
             {
                 timerScript.StartTimer(false);   
-                timerScript.PlayHeartbreakFX();  
+                timerScript.PlayHeartbreakFX();
+
+                timerScript.DeductTime(5f);
             }
             if (bgmSource != null)
                 bgmSource.Stop();
