@@ -58,7 +58,7 @@
     {
       "id": "branch_sorry",
       "speaker": "You",
-      "text": "Sorry—didn’t realize.",
+      "text": "Sorry- didn’t realize.",
       "next": "aiko_soft_correct"
     },
     {
@@ -94,7 +94,7 @@
       "id": "close_merge_1",
       "speaker": "Narrator",
       "expression": "neutral2",
-      "text": "Aiko’s hand swings close to yours—brushing, then pulling away, then brushing again. Almost like she’s testing the distance.",
+      "text": "Aiko’s hand swings close to yours, brushing, then pulling away, then brushing again. Almost like she’s testing the distance.",
       "next": "aiko_underbreath"
     },
 
