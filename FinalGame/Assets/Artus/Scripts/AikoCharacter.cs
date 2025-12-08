@@ -18,6 +18,7 @@ public class AikoCharacter : MonoBehaviour
     public Sprite aiko_shocked;
     public Sprite aiko_smug;
     public Sprite aiko_neutral2;
+    public Sprite aiko_invisible;
 
     public AikoBounce bounce;
 
@@ -36,7 +37,8 @@ public class AikoCharacter : MonoBehaviour
             { "shocked", aiko_shocked },
             { "smug", aiko_smug },
             { "happy2", aiko_happy2 },
-            { "neutral2", aiko_neutral2 }
+            { "neutral2", aiko_neutral2 },
+            { "invisible", aiko_invisible }
         };
     }
 

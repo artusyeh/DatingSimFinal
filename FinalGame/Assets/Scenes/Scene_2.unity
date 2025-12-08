@@ -3080,6 +3080,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2311178877110563303, guid: 1dbcac79dfae0cf4d9b6de3d1dfeb3ee, type: 3}
     - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: aiko_invisible
+      value: 
+      objectReference: {fileID: 8890691845753528624, guid: 9a863b3a5f24c50409f4fcfc0e99926c, type: 3}
+    - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1644592229}
@@ -3090,6 +3094,18 @@ PrefabInstance:
     - target: {fileID: 1968223444027632361, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5767177
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8351727
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9056604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

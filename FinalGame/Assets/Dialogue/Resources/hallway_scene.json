@@ -4,7 +4,7 @@
     {
       "id": "hall_start",
       "speaker": "Narrator",
-      "expression": "neutral2",
+      "expression": "invisible",
       "text": "The hallway buzzes with students rushing between classes as you and Aiko step out of the lecture room.",
       "next": "aiko_comment_walk"
     },
@@ -33,7 +33,7 @@
     {
       "id": "mc_social_status",
       "speaker": "You",
-      "text": "Three? That’s generous.",
+      "text": "Three???? That’s generous of you.",
       "next": "aiko_fake_offended"
     },
     {
@@ -47,7 +47,7 @@
     {
       "id": "mc_teasing_choice_intro",
       "speaker": "Narrator",
-      "text": "She looks up at you with mock indignation, waiting for your response.",
+      "text": "She looks up at you, waiting for your response.",
       "next": "mc_teasing_choice"
     },
 
@@ -83,7 +83,7 @@
     {
       "id": "aiko_flustered",
       "speaker": "Aiko",
-      "expression": "blushing",
+      "expression": "shocked",
       "text": "W–Who’s stealing me?? Absolutely no one is stealing me!",
       "next": "narrator_hallway_warm"
     },
