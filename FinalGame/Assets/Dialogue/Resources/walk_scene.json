@@ -1,0 +1,190 @@
+{
+  "startNode": "close_start",
+  "nodes": [
+    {
+      "id": "close_start",
+      "speaker": "Narrator",
+      "expression": "happy2",
+      "text": "Aiko drifts closer—so close your arms almost brush with every step. Her perfume mixes with the warm hallway air, distracting in a way you weren't prepared for.",
+      "next": "aiko_light_tease"
+    },
+
+    {
+      "id": "aiko_light_tease",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "…You’re walking kinda close, y’know.",
+      "next": "mc_choice_reaction"
+    },
+
+    {
+      "id": "mc_choice_reaction",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "You’re the one who moved closer.",
+          "next": "branch_you_moved",
+          "isCorrect": true
+        },
+        {
+          "text": "Sorry—didn’t realize.",
+          "next": "branch_sorry",
+          "isCorrect": false
+        },
+        {
+          "text": "If I moved away… would you follow?",
+          "next": "branch_bold",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "branch_you_moved",
+      "speaker": "You",
+      "expression": "smug",
+      "text": "You’re the one who moved closer.",
+      "next": "aiko_blush_denial"
+    },
+    {
+      "id": "aiko_blush_denial",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "N-No I didn’t. You imagined it.",
+      "next": "close_merge_1"
+    },
+
+    {
+      "id": "branch_sorry",
+      "speaker": "You",
+      "text": "Sorry—didn’t realize.",
+      "next": "aiko_soft_correct"
+    },
+    {
+      "id": "aiko_soft_correct",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "Don’t apologize… I didn’t say it was bad.",
+      "next": "close_merge_1"
+    },
+
+    {
+      "id": "branch_bold",
+      "speaker": "You",
+      "expression": "smug",
+      "text": "If I moved away… would you follow?",
+      "next": "aiko_startled_bold"
+    },
+    {
+      "id": "aiko_startled_bold",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "W-Wha—?! I’m not chasing you down the hallway!",
+      "next": "narrator_internal_chase"
+    },
+    {
+      "id": "narrator_internal_chase",
+      "speaker": "Narrator",
+      "text": "Judging by the way her eyes linger on you… she absolutely would.",
+      "next": "close_merge_1"
+    },
+
+    {
+      "id": "close_merge_1",
+      "speaker": "Narrator",
+      "expression": "neutral2",
+      "text": "Aiko’s hand swings close to yours—brushing, then pulling away, then brushing again. Almost like she’s testing the distance.",
+      "next": "aiko_underbreath"
+    },
+
+    {
+      "id": "aiko_underbreath",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "…You walk warmer than I expected.",
+      "next": "mc_choice_warm"
+    },
+
+    {
+      "id": "mc_choice_warm",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "If you’re cold, you can get closer.",
+          "next": "branch_invite_closer",
+          "isCorrect": true
+        },
+        {
+          "text": "You keep bumping into me—are you sure you’re okay?",
+          "next": "branch_tease_clumsy",
+          "isCorrect": true
+        },
+        {
+          "text": "Warm? You’re basically a space heater yourself.",
+          "next": "branch_counter_flirt",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "branch_invite_closer",
+      "speaker": "You",
+      "expression": "smug",
+      "text": "If you’re cold, you can get closer.",
+      "next": "aiko_freezes"
+    },
+    {
+      "id": "aiko_freezes",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "W-Why would you say that out loud…?",
+      "next": "close_merge_2"
+    },
+
+    {
+      "id": "branch_tease_clumsy",
+      "speaker": "You",
+      "text": "You keep bumping into me—are you sure you’re okay?",
+      "next": "aiko_defensive"
+    },
+    {
+      "id": "aiko_defensive",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "I-I’m not bumping into you. You’re just… very in the way.",
+      "next": "close_merge_2"
+    },
+
+    {
+      "id": "branch_counter_flirt",
+      "speaker": "You",
+      "text": "Warm? You’re basically a space heater yourself.",
+      "next": "aiko_counter_heat"
+    },
+    {
+      "id": "aiko_counter_heat",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "H-Hey! I’m not that warm—am I?",
+      "next": "close_merge_2"
+    },
+
+    {
+      "id": "close_merge_2",
+      "speaker": "Narrator",
+      "text": "Her fingers brush yours again—this time lingering a second longer before she quickly pulls away.",
+      "next": "aiko_final_line"
+    },
+
+    {
+      "id": "aiko_final_line",
+      "speaker": "Aiko",
+      "expression": "happy2",
+      "text": "…You’re really something, y’know that?",
+      "next": "END"
+    }
+  ]
+}

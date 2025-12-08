@@ -1,0 +1,111 @@
+{
+  "startNode": "hall_start",
+  "nodes": [
+    {
+      "id": "hall_start",
+      "speaker": "Narrator",
+      "expression": "neutral2",
+      "text": "The hallway buzzes with students rushing between classes as you and Aiko step out of the lecture room.",
+      "next": "aiko_comment_walk"
+    },
+
+    {
+      "id": "aiko_comment_walk",
+      "speaker": "Aiko",
+      "expression": "happy",
+      "text": "You know… I don’t usually ask people to walk with me. Feel honored.",
+      "next": "mc_reply_honor"
+    },
+    {
+      "id": "mc_reply_honor",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Oh? Am I supposed to feel special?",
+      "next": "aiko_tease_honor"
+    },
+    {
+      "id": "aiko_tease_honor",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "Obviously. My presence increases your social status by at least three tiers.",
+      "next": "mc_social_status"
+    },
+    {
+      "id": "mc_social_status",
+      "speaker": "You",
+      "text": "Three? That’s generous.",
+      "next": "aiko_fake_offended"
+    },
+    {
+      "id": "aiko_fake_offended",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "Um, excuse me? I’ll have you know people would line up to walk with me.",
+      "next": "mc_teasing_choice_intro"
+    },
+
+    {
+      "id": "mc_teasing_choice_intro",
+      "speaker": "Narrator",
+      "text": "She looks up at you with mock indignation, waiting for your response.",
+      "next": "mc_teasing_choice"
+    },
+
+    {
+      "id": "mc_teasing_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Then I better stay close before someone steals you.",
+          "next": "branch_flirty",
+          "isCorrect": true
+        },
+        {
+          "text": "Okay then go walk with them.",
+          "next": "branch_bad_hall",
+          "isCorrect": false
+        },
+        {
+          "text": "I mean… I like walking with you too.",
+          "next": "branch_soft",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "branch_flirty",
+      "speaker": "You",
+      "text": "Then I better stay close before someone steals you.",
+      "next": "aiko_flustered"
+    },
+    {
+      "id": "aiko_flustered",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "W–Who’s stealing me?? Absolutely no one is stealing me!",
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "branch_soft",
+      "speaker": "You",
+      "text": "I mean… I like walking with you too.",
+      "next": "aiko_soft_smile"
+    },
+    {
+      "id": "aiko_soft_smile",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "…Good. Because I like it too.",
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "narrator_hallway_warm",
+      "speaker": "Narrator",
+      "text": "Aiko walks a little closer to you. The hallway noise fades under the warmth of the moment."
+    }
+  ]
+}

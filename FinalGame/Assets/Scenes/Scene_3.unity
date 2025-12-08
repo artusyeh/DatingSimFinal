@@ -1237,7 +1237,7 @@ MonoBehaviour:
   dialogueBoxImage: {fileID: 136111309}
   mcBoxSprite: {fileID: 4114697686601932199, guid: 0c95744413d1cca4b95486ed07d625c0, type: 3}
   aikoBoxSprite: {fileID: -327818743068282864, guid: b2a1b6d11def97745913969802538359, type: 3}
-  dialogueFileName: opening_scene
+  dialogueFileName: walk_scene
   typewriterSpeed: 0.04
   typeSFXSource: {fileID: 1862289369}
   typeSFXClip: {fileID: 8300000, guid: 764e8e341639f0e46b2a0503131a3037, type: 3}
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   charsPerSound: 2
   timerScript: {fileID: 2092892962}
   zoomInScript: {fileID: 1307471491}
-  aikoCharacter: {fileID: 1644592230}
+  aikoCharacter: {fileID: 0}
   bgmSource: {fileID: 1738840020}
   sceneTransition: {fileID: 1850282630}
   faceTarget: {fileID: 1574960128}
@@ -1305,11 +1305,11 @@ Transform:
   m_GameObject: {fileID: 1233505375}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5200381, y: -25.625, z: -4552.1353}
-  m_LocalScale: {x: 54.395004, y: 50.600002, z: 50.600002}
+  m_LocalPosition: {x: -0.07819733, y: -1.4692571, z: -11.125275}
+  m_LocalScale: {x: 1.2083801, y: 1.1240745, z: 1.1240745}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1639438381}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!328 &1233505377
 VideoPlayer:
@@ -1318,8 +1318,8 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233505375}
-  m_Enabled: 0
-  m_VideoClip: {fileID: 32900000, guid: 6ac7b7851d958484ba035dd3f182a46d, type: 3}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 4aa0620daafb15d44bf2705fb3c58aed, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1307471487}
@@ -1363,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1243265662
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1408,7 +1408,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7266450482845084364, guid: a0eb562d41a6ca44bbb817275735f1fb, type: 3}
+  m_Sprite: {fileID: 5402174233390583094, guid: e0007eda719f93c45a9dfc19688868f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1428,8 +1428,8 @@ Transform:
   m_GameObject: {fileID: 1243265661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -0.53, z: 0.032366}
-  m_LocalScale: {x: 0.5365188, y: 0.5365188, z: 0.5365188}
+  m_LocalPosition: {x: -0, y: -1.02, z: 0.032366}
+  m_LocalScale: {x: 1.0628974, y: 1.0628974, z: 1.0628974}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1673,8 +1673,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1307471487}
   dialogueBox: {fileID: 136111307}
-  speakerText: {fileID: 362010367}
-  bodyText: {fileID: 1820264332}
+  speakerText: {fileID: 0}
+  bodyText: {fileID: 0}
   timerText: {fileID: 1649392407}
   timerSprite: {fileID: 1190854951}
 --- !u!1 &1431581936
@@ -2308,7 +2308,6 @@ RectTransform:
   - {fileID: 2098838538}
   - {fileID: 1185224197}
   - {fileID: 1506765729}
-  - {fileID: 1233505376}
   - {fileID: 136111308}
   - {fileID: 362010368}
   - {fileID: 1820264333}
@@ -2325,17 +2324,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
   m_PrefabInstance: {fileID: 7478125131545010783}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1644592230 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
-  m_PrefabInstance: {fileID: 7478125131545010783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834930983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026aeef92b9668547be7052c80f0d285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1644592232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,6 +3076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aiko Character
       objectReference: {fileID: 0}
+    - target: {fileID: 1968223444027632361, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3101,6 +3093,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1307471488}
+  - {fileID: 1233505376}
   - {fileID: 1243265663}
   - {fileID: 7478125131545010783}
   - {fileID: 1639438381}
