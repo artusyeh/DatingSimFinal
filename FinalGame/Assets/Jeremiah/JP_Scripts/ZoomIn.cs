@@ -1,8 +1,8 @@
 using System.Collections;
 using Unity.Mathematics;
-using UnityEditor.Rendering;
+//using UnityEditor.Rendering;
 using UnityEngine;
-using static UnityEditorInternal.ReorderableList;
+//using static UnityEditorInternal.ReorderableList;
 
 public class ZoomIn : MonoBehaviour
 {
