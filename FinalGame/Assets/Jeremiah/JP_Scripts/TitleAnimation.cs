@@ -1,13 +1,14 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleAnimation : MonoBehaviour
 {
     [Header("Logo Pieces")]
-    [SerializeField] CanvasGroup title;  
+    [SerializeField] CanvasGroup title;
     [SerializeField] RectTransform clockRect;
     [SerializeField] CanvasGroup clockCanvasGroup;
-    [SerializeField] CanvasGroup heartCanvasGroup;  
+    [SerializeField] CanvasGroup heartCanvasGroup;
 
     [Header("Timing")]
     [SerializeField] float fadeDuration = 1f;
@@ -22,19 +23,29 @@ public class TitleAnimation : MonoBehaviour
     [SerializeField] ButtonAnimator buttonAnimator;
     [SerializeField] ButtonContainerAnimator buttonContainerAnimator;
 
+    [Header("Flash Settings")]
+    [SerializeField] Image flashImage;
+    [SerializeField] float flashDuration = 0.3f;
+
     void Start()
     {
         clockCanvasGroup.alpha = 0;
         heartCanvasGroup.alpha = 0;
-            StartCoroutine(PlaySequence());
+        StartCoroutine(PlaySequence());
+
+        if (flashImage != null)
+            flashImage.color = new Color(1f, 1f, 1f, 0f);
     }
 
     IEnumerator PlaySequence()
     {
         yield return StartCoroutine(FadeIn(title, fadeDuration));
-      //  yield return new WaitForSeconds(delayBetween);
+        //  yield return new WaitForSeconds(delayBetween);
         yield return StartCoroutine(DropIn(clockRect, clockCanvasGroup, dropDuration)); yield return new WaitForSeconds(delayBetween);
         yield return StartCoroutine(FadeIn(heartCanvasGroup, heartDuration));
+
+        if (flashImage != null)
+            yield return StartCoroutine(ScreenFlash());
 
         buttonContainerAnimator.Play();
     }
@@ -64,15 +75,39 @@ public class TitleAnimation : MonoBehaviour
         {
             t += Time.deltaTime;
             float progress = t / duration;
+            float eased = 1f - Mathf.Pow(1f - progress, 3f);
+            rt.anchoredPosition = Vector2.Lerp(startPos, endPos, eased);
+            cg.alpha = eased;
 
-            rt.anchoredPosition = Vector2.Lerp(startPos, endPos, progress);
-            cg.alpha = progress;
- 
 
             yield return null;
         }
 
         rt.anchoredPosition = endPos;
         cg.alpha = 1;
+    }
+    IEnumerator ScreenFlash()
+    {
+        float half = flashDuration / 2f;
+        float t = 0f;
+
+        // Fade in
+        while (t < half)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, t / half);
+            flashImage.color = new Color(1f, 1f, 1f, alpha);
+            yield return null;
+        }
+
+        t = 0f;
+        while (t < half)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, t / half);
+            flashImage.color = new Color(1f, 1f, 1f, alpha);
+            yield return null;
+        }
+        flashImage.color = new Color(1f, 1f, 1f, 0f);
     }
 }
