@@ -1,62 +1,111 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Transactions;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI References")]
     public TMP_Text speakerText;
     public TMP_Text bodyText;
-    public Transform choicesContainer;      // Vertical Layout Group
-    public Button choiceButtonPrefab;       // Prefab for a choice button
+    public Transform choicesContainer;
+    public Button choiceButtonPrefab;
+
+    [Header("Dialogue Box Sprites")]
+    [SerializeField] Image dialogueBoxImage;
+    [SerializeField] Sprite mcBoxSprite;
+    [SerializeField] Sprite aikoBoxSprite;
 
     [Header("Dialogue File")]
-    public string dialogueFileName = "opening_scene"; // e.g. "dialogue_scene_1"
+    public string dialogueFileName = "opening_scene";
 
     [Header("Typewriter Settings")]
-    public float typewriterSpeed = 0.02f;   // seconds per character
+    public float typewriterSpeed = 0.02f;
 
     [Header("Typewriter SFX")]
     public AudioSource typeSFXSource;
     public AudioClip typeSFXClip;
     public float minPitch = 0.9f;
     public float maxPitch = 1.1f;
-    public int charsPerSound = 2;          // play sound every X characters
+    public int charsPerSound = 2;
 
     [Header("Timer")]
     public TimerScript timerScript;
+    [SerializeField] ZoomIn zoomInScript;
 
-    // Aiko character reference for expression changes
     [Header("Aiko Character")]
     public AikoCharacter aikoCharacter;
+
+    [Header("Screen Shake")]
+    public TestScreenShake shaker;
+
+
+    [Header("Ending Scenes")]
+    public string goodEndingSceneName;
+    public string badEndingSceneName;
+    [SerializeField] NonVideoSceneTransitions transitionManager;
+
+
+    [Header("Jumpscare 1 (Video)")]
+    public GameObject jumpscareVideoObject;
+    public float jumpscareDuration = 2f;
+
+    [Header("Jumpscare 1 Hide Objects")]
+    public GameObject[] jumpscare1HideObjects;
+
+    [Header("Jumpscare 2 (After Creepy Aiko)")]
+    public GameObject jumpscare2VideoObject;
+    public float jumpscare2Duration = 2f;
+
+    [Header("Jumpscare 2 Hide Objects")]
+    public GameObject[] jumpscare2HideObjects;
+
+    [Header("Creepy Aiko Jumpscare")]
+    public GameObject creepyAiko;
+    public float creepySlideDistance = 6f;
+    public float creepySlideSpeed = 6f;
+    public float creepyHoldTime = 1.2f;
+
+    public AudioSource creepyAikoSFXSource;
+    public AudioClip creepyAikoSFXClip;
+
+    [Header("Blackout")]
+    public GameObject blackoutObject;
+    public AudioSource blackoutSFXSource;
+    public AudioClip blackoutSFXClip;
+
+    [Header("BGM + Transition")]
+    public AudioSource bgmSource;
 
     private DialogueRoot dialogueRoot;
     private Dictionary<string, DialogueNode> nodeLookup;
     private DialogueNode currentNode;
 
-    // click-to-continue state
     private bool waitingForClick = false;
     private string nextNodeOnClick = null;
 
-    // typewriter state
     private bool isTyping = false;
     private string fullText = "";
     private Coroutine typingCoroutine;
 
-    // BGM Source
-    [SerializeField] AudioSource bgmSource;
 
     void Start()
     {
+        if (jumpscareVideoObject != null) jumpscareVideoObject.SetActive(false);
+        if (jumpscare2VideoObject != null) jumpscare2VideoObject.SetActive(false);
+        if (blackoutObject != null) blackoutObject.SetActive(false);
+        if (creepyAiko != null) creepyAiko.SetActive(false);
+
         LoadDialogue();
         StartDialogue();
     }
 
     void Update()
     {
-        // Left-click behavior
         if (Input.GetMouseButtonDown(0))
         {
             if (isTyping)
@@ -65,9 +114,10 @@ public class DialogueManager : MonoBehaviour
             }
             else if (waitingForClick && !string.IsNullOrEmpty(nextNodeOnClick))
             {
-                waitingForClick = false;
                 string target = nextNodeOnClick;
+                waitingForClick = false;
                 nextNodeOnClick = null;
+
                 GoToNode(target);
             }
         }
@@ -75,174 +125,300 @@ public class DialogueManager : MonoBehaviour
 
     void LoadDialogue()
     {
-        // JSON should be at: Assets/Resources/<dialogueFileName>.json
         TextAsset jsonAsset = Resources.Load<TextAsset>(dialogueFileName);
-        if (jsonAsset == null)
-        {
-            Debug.LogError("Dialogue JSON not found at Resources/" + dialogueFileName);
-            return;
-        }
-
         dialogueRoot = JsonUtility.FromJson<DialogueRoot>(jsonAsset.text);
-        if (dialogueRoot == null)
-        {
-            Debug.LogError("Failed to parse dialogue JSON.");
-            return;
-        }
 
         nodeLookup = new Dictionary<string, DialogueNode>();
-
-        foreach (var node in dialogueRoot.nodes)
-        {
-            if (node == null)
-            {
-                Debug.LogWarning("Null node found in dialogueRoot.nodes");
-                continue;
-            }
-
-            if (!nodeLookup.ContainsKey(node.id))
-            {
-                nodeLookup.Add(node.id, node);
-            }
-            else
-            {
-                Debug.LogWarning("Duplicate node id found: " + node.id);
-            }
-        }
-
-        Debug.Log("Loaded dialogue. Nodes count: " + nodeLookup.Count);
+        foreach (DialogueNode n in dialogueRoot.nodes)
+            nodeLookup[n.id] = n;
     }
 
     void StartDialogue()
     {
-        if (dialogueRoot == null)
-        {
-            Debug.LogError("DialogueRoot is null. Did JSON fail to load?");
-            return;
-        }
-
         GoToNode(dialogueRoot.startNode);
     }
 
+
+
+
+
+    //                     MAIN NODE HANDLER
     void GoToNode(string nodeId)
     {
-        // Reset states
+        StopTypingIfNeeded();
         waitingForClick = false;
         nextNodeOnClick = null;
-        StopTypingIfNeeded();
 
         if (!nodeLookup.TryGetValue(nodeId, out currentNode))
+            return;
+
+        // ENDINGS
+        if (!string.IsNullOrEmpty(currentNode.endType))
         {
-            Debug.LogError("No node with id: " + nodeId);
+            HandleEnding(currentNode.endType);
             return;
         }
 
-        Debug.Log("GoToNode: " + nodeId);
+        // BLACKOUT (turn off bgm etc)
+        HandleBlackout(currentNode);
 
-        // Handle special timer control nodes BEFORE any UI
+        
+
+        // TIMER CONTROL
         if (!string.IsNullOrEmpty(currentNode.speaker) &&
             currentNode.speaker.StartsWith("TimerControl"))
         {
             HandleTimerControlNode(currentNode);
-
-            // Immediately jump to the next node, no UI for this control node
             if (!string.IsNullOrEmpty(currentNode.next))
-            {
                 GoToNode(currentNode.next);
-                return;
-            }
-            else
-            {
-                Debug.LogWarning("TimerControl node has no next: " + currentNode.id);
-                return;
-            }
+            return;
         }
 
-        // Set Aiko's expression if applicable
-        if (currentNode.speaker == "Aiko" && aikoCharacter != null || currentNode.speaker == "Narrator" && aikoCharacter != null || currentNode.speaker == "You" && aikoCharacter != null)
+        // ZOOM
+        if (!string.IsNullOrEmpty(currentNode.zoomType))
+            HandleZoomNode(currentNode);
+
+        // CREEPY AIKO JUMPSCARE
+        if (currentNode.creepyAikoJumpscare)
         {
-            aikoCharacter.SetExpression(currentNode.expression);
+            HandleCreepyAikoJumpscare(currentNode);
+            return;
         }
 
-        // Normal speaker
-        if (speakerText != null)
-            speakerText.text = currentNode.speaker;
+        // NORMAL JUMPSCARE 1
+        if (currentNode.jumpscare)
+        {
+            HandleJumpscare1(currentNode);
+            return;
+        }
 
-        // Clear choices for new node
+        // SHAKE
+        HandleShake(currentNode);
+
+        // Expression
+        if (aikoCharacter != null)
+            aikoCharacter.SetExpression(currentNode.expression);
+
+        // Speaker box
+        speakerText.text = currentNode.speaker;
+        dialogueBoxImage.sprite =
+            (currentNode.speaker == "Aiko") ? aikoBoxSprite : mcBoxSprite;
+
         ClearChoices();
-
-        // Start typewriter effect for this node's text
         StartTyping(currentNode.text);
     }
 
-    /// Reacts to special nodes that control the timer.
-    /// Uses the "speaker" field as a control string:
-    /// - "TimerControl:Stop" -> stop and reset timer + positive heart FX
-    /// - "TimerControl:Continue" -> start/continue timer without resetting
+
+
+
+
+    //                      ENDING SYSTEM
+    void HandleEnding(string type)
+    {
+        if (type == "good" && !string.IsNullOrEmpty(goodEndingSceneName))
+        {
+           //SceneManager.LoadScene(goodEndingSceneName);
+            transitionManager.LoadSceneByName(goodEndingSceneName);
+            return;
+
+           // return;
+        }
+
+        if (type == "bad" && !string.IsNullOrEmpty(badEndingSceneName))
+        {
+           // SceneManager.LoadScene(badEndingSceneName);
+            transitionManager.LoadSceneByName(badEndingSceneName);
+            return;
+        }
+
+        Debug.LogWarning("ENDING TYPE SET BUT NO SCENE ASSIGNED!");
+    }
+
+
+
+
+
+
+    //               CREEPY AIKO SLIDE UP JUMPSCARE
+    void HandleCreepyAikoJumpscare(DialogueNode node)
+    {
+        waitingForClick = false;
+
+        if (creepyAikoSFXSource && creepyAikoSFXClip)
+            creepyAikoSFXSource.PlayOneShot(creepyAikoSFXClip);
+
+        creepyAiko.SetActive(true);
+        StartCoroutine(CreepyAikoRoutine(node));
+    }
+
+    IEnumerator CreepyAikoRoutine(DialogueNode node)
+    {
+        Vector3 start = creepyAiko.transform.localPosition;
+        Vector3 end = start + new Vector3(0, creepySlideDistance, 0);
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime * creepySlideSpeed;
+            creepyAiko.transform.localPosition = Vector3.Lerp(start, end, t);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(creepyHoldTime);
+
+        creepyAiko.transform.localPosition = start;
+        creepyAiko.SetActive(false);
+
+        // Play Jumpscare 2 afterwards
+        if (jumpscare2VideoObject)
+        {
+            StartCoroutine(PlayJumpscare2ThenContinue(node));
+            yield break;
+        }
+
+        GoToNode(node.next);
+    }
+
+
+
+
+
+    //                        JUMPSCARE 2
+    IEnumerator PlayJumpscare2ThenContinue(DialogueNode node)
+    {
+        if (jumpscare2HideObjects != null)
+            foreach (var obj in jumpscare2HideObjects)
+                if (obj != null) obj.SetActive(false);
+
+        jumpscare2VideoObject.SetActive(true);
+
+        yield return new WaitForSeconds(jumpscare2Duration);
+
+        jumpscare2VideoObject.SetActive(false);
+
+        if (jumpscare2HideObjects != null)
+            foreach (var obj in jumpscare2HideObjects)
+                if (obj != null) obj.SetActive(true);
+
+        GoToNode(node.next);
+    }
+
+
+
+
+
+    //                     JUMPSCARE 1
+    void HandleJumpscare1(DialogueNode node)
+    {
+        if (jumpscare1HideObjects != null)
+            foreach (var obj in jumpscare1HideObjects)
+                if (obj != null) obj.SetActive(false);
+
+        jumpscareVideoObject.SetActive(true);
+        StartCoroutine(Jumpscare1Routine(node));
+    }
+
+    IEnumerator Jumpscare1Routine(DialogueNode node)
+    {
+        yield return new WaitForSeconds(jumpscareDuration);
+
+        jumpscareVideoObject.SetActive(false);
+
+        if (jumpscare1HideObjects != null)
+            foreach (var obj in jumpscare1HideObjects)
+                if (obj != null) obj.SetActive(true);
+
+        GoToNode(node.next);
+    }
+
+
+
+
+
+    //                       BLACKOUT
+    void HandleBlackout(DialogueNode node)
+    {
+        if (blackoutObject == null) return;
+
+        if (node.blackout)
+        {
+            blackoutObject.SetActive(true);
+            bgmSource?.Stop();
+
+            if (blackoutSFXSource && blackoutSFXClip)
+                blackoutSFXSource.PlayOneShot(blackoutSFXClip);
+        }
+        else
+        {
+            blackoutObject.SetActive(false);
+        }
+    }
+
+
+
+
+
+
+
+    //                   SHAKE / TIMER / ZOOM
+    void HandleShake(DialogueNode node)
+    {
+        if (shaker == null || string.IsNullOrEmpty(node.shake)) return;
+
+        if (node.shake == "good") shaker.ShakeGood();
+        if (node.shake == "bad") shaker.ShakeBad();
+    }
 
     void HandleTimerControlNode(DialogueNode node)
     {
-        if (timerScript == null) return;
-
         if (node.speaker == "TimerControl:Stop")
-        {
-            // Stop and reset timer, then play positive heart FX
             timerScript.ResetTimer();
-            timerScript.PlayHeartFX();
-            Debug.Log("TimerControl:Stop processed at node " + node.id);
-        }
         else if (node.speaker == "TimerControl:Continue")
-        {
-            // Ensure timer is running, but don't reset or replay heartbreak here
             timerScript.StartTimer(false);
-            Debug.Log("TimerControl:Continue processed at node " + node.id);
-        }
     }
 
-    // TYPEWRITER LOGIC
+    void HandleZoomNode(DialogueNode node)
+    {
+        if (zoomInScript == null) return;
+        // Add zoom logic if needed
+    }
 
+
+
+
+
+
+    //                 TYPEWRITER + CHOICES
     void StartTyping(string text)
     {
         StopTypingIfNeeded();
-
-        fullText = text ?? "";
-        if (bodyText != null)
-            bodyText.text = "";
-
-        typingCoroutine = StartCoroutine(TypeTextCoroutine(fullText));
+        fullText = text;
+        bodyText.text = "";
+        typingCoroutine = StartCoroutine(TypeTextCoroutine(text));
     }
 
-    IEnumerator TypeTextCoroutine(string textToType)
+    IEnumerator TypeTextCoroutine(string text)
     {
         isTyping = true;
 
-        for (int i = 0; i < textToType.Length; i++)
+        for (int i = 0; i < text.Length; i++)
         {
-            if (bodyText != null)
-                bodyText.text += textToType[i];
+            bodyText.text += text[i];
 
-            // Play sound every few characters
-            if (charsPerSound > 0 && i % charsPerSound == 0)
-            {
+            if (i % charsPerSound == 0)
                 PlayTypeSound();
-            }
 
             yield return new WaitForSeconds(typewriterSpeed);
         }
 
         isTyping = false;
-        typingCoroutine = null;
-
         OnTypingComplete();
     }
 
     void FinishTypingInstantly()
     {
         StopTypingIfNeeded();
-
-        if (bodyText != null)
-            bodyText.text = fullText;
-
+        bodyText.text = fullText;
         isTyping = false;
         OnTypingComplete();
     }
@@ -250,11 +426,7 @@ public class DialogueManager : MonoBehaviour
     void StopTypingIfNeeded()
     {
         if (typingCoroutine != null)
-        {
             StopCoroutine(typingCoroutine);
-            typingCoroutine = null;
-        }
-        isTyping = false;
     }
 
     void PlayTypeSound()
@@ -268,88 +440,98 @@ public class DialogueManager : MonoBehaviour
 
     void OnTypingComplete()
     {
-        int choiceCount = (currentNode.choices == null) ? 0 : currentNode.choices.Length;
-        Debug.Log("Typing complete. Node '" + currentNode.id + "' has " + choiceCount + " choices.");
-
-        if (choiceCount > 0)
+        if (currentNode.choices != null && currentNode.choices.Length > 0)
         {
-            // Create choice buttons
-            foreach (var choice in currentNode.choices)
-            {
-                CreateChoiceButton(choice);
-            }
+            foreach (var c in currentNode.choices)
+                CreateChoiceButton(c);
         }
         else
         {
-            // No choices: enable click-to-continue if there is a next node
-            if (!string.IsNullOrEmpty(currentNode.next))
-            {
-                waitingForClick = true;
-                nextNodeOnClick = currentNode.next;
-            }
-            else
-            {
-                Debug.Log("Dialogue ended at node: " + currentNode.id);
-            }
+            waitingForClick = true;
+            nextNodeOnClick = currentNode.next;
         }
     }
 
-    // CHOICES UI
-
     void ClearChoices()
     {
-        if (choicesContainer == null) return;
-
-        for (int i = choicesContainer.childCount - 1; i >= 0; i--)
-        {
-            Destroy(choicesContainer.GetChild(i).gameObject);
-        }
+        foreach (Transform c in choicesContainer)
+            Destroy(c.gameObject);
     }
 
     void CreateChoiceButton(Choice choice)
     {
-        if (choiceButtonPrefab == null)
-        {
-            Debug.LogError("ChoiceButtonPrefab is not assigned on DialogueManager.");
-            return;
-        }
-
-        if (choicesContainer == null)
-        {
-            Debug.LogError("ChoicesContainer is not assigned on DialogueManager.");
-            return;
-        }
-
         Button btn = Instantiate(choiceButtonPrefab, choicesContainer);
         TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
+
         if (btnText != null)
-        {
             btnText.text = choice.text;
+
+        // New: Make delayed choices invisible until delay is over
+        if (choice.delay > 0f)
+        {
+            // Disable interaction
+            btn.interactable = false;
+
+            // Hide visually AND from layout
+            CanvasGroup cg = btn.gameObject.GetComponent<CanvasGroup>();
+            if (cg == null) cg = btn.gameObject.AddComponent<CanvasGroup>();
+
+            cg.alpha = 0f;            // Invisible
+            cg.blocksRaycasts = false; // Cannot click
+            cg.interactable = false;
+
+            StartCoroutine(ShowButtonAfterDelay(btn, cg, choice.delay));
+        }
+        else
+        {
+            // Immediate choices appear normally
+            btn.interactable = true;
         }
 
-        btn.onClick.AddListener(() =>
-        {
-            HandleChoiceSelection(choice);
-        });
-
-        Debug.Log("Created choice button: " + choice.text + " > " + choice.next);
+        btn.onClick.AddListener(() => HandleChoiceSelection(choice));
     }
+
+
+    IEnumerator ShowButtonAfterDelay(Button btn, CanvasGroup cg, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Fadein instantly or change alpha to 1
+        cg.alpha = 1f;
+        cg.blocksRaycasts = true;
+        cg.interactable = true;
+
+        btn.interactable = true;
+    }
+
+
+    //                 CHOICE HANDLER   
 
     void HandleChoiceSelection(Choice choice)
     {
-        // Wrong answers: start/continue timer + heartbreak FX
-        if (!choice.isCorrect)
+        // CORRECT CHOICE
+        if (choice.isCorrect)
         {
-            if (timerScript != null)
-            {
-                timerScript.StartTimer(false);   
-                timerScript.PlayHeartbreakFX();  
-            }
+            // Pause the timer
+            timerScript?.StopTimer();
+
+            // Positive FX
+            timerScript?.PlayHeartFX();
+        }
+        else
+        {
+            // WRONG CHOICE
+
+            // Stop the BGM immediately
             if (bgmSource != null)
                 bgmSource.Stop();
+
+            // Negative FX
+            timerScript?.PlayHeartbreakFX();
+            timerScript?.StartTimer(false);
         }
 
-        GoToNode(choice.next);
         ClearChoices();
+        GoToNode(choice.next);
     }
 }

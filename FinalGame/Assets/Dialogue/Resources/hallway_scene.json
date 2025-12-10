@@ -1,0 +1,216 @@
+{
+  "startNode": "hall_start",
+  "nodes": [
+    {
+      "id": "hall_start",
+      "speaker": "Narrator",
+      "expression": "invisible",
+      "text": "The hallway buzzes with students rushing between classes as you and Aiko step out of the lecture room.",
+      "next": "aiko_comment_walk"
+    },
+
+    {
+      "id": "aiko_comment_walk",
+      "speaker": "Aiko",
+      "expression": "happy",
+      "text": "You know… I don’t usually ask people to walk with me. Feel honored.",
+      "next": "mc_reply_honor"
+    },
+    {
+      "id": "mc_reply_honor",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Oh? Am I supposed to feel special?",
+      "next": "aiko_tease_honor"
+    },
+    {
+      "id": "aiko_tease_honor",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "Obviously. My presence increases your social status by at least three tiers.",
+      "next": "mc_social_status"
+    },
+    {
+      "id": "mc_social_status",
+      "speaker": "You",
+      "text": "Three???? That’s generous of you.",
+      "next": "aiko_fake_offended"
+    },
+    {
+      "id": "aiko_fake_offended",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "Um, excuse me? I’ll have you know people would line up to walk with me.",
+      "next": "mc_teasing_choice_intro"
+    },
+
+    {
+      "id": "mc_teasing_choice_intro",
+      "speaker": "Narrator",
+      "text": "She looks up at you, waiting for your response.",
+      "next": "mc_teasing_choice"
+    },
+
+    {
+      "id": "mc_teasing_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Then I better stay close before someone steals you.",
+          "next": "branch_flirty",
+          "isCorrect": true,
+          "delay": 3
+        },
+        {
+          "text": "Okay then go walk with them.",
+          "next": "branch_bad_hall",
+          "isCorrect": false
+        },
+        {
+          "text": "I mean… I like walking with you too.",
+          "next": "branch_soft",
+          "isCorrect": false
+        }
+      ]
+    },
+
+    {
+      "id": "branch_flirty",
+      "speaker": "You",
+      "text": "Then I better stay close before someone steals you.",
+      "next": "aiko_flustered"
+    },
+    {
+      "id": "aiko_flustered",
+      "speaker": "Aiko",
+      "expression": "shocked",
+      "text": "W–Who’s stealing me?? Absolutely no one is stealing me!",
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "branch_soft",
+      "speaker": "You",
+      "text": "I mean… I like walking with you too.",
+      "next": "aiko_soft_smile"
+    },
+    {
+      "id": "aiko_soft_smile",
+      "speaker": "Aiko",
+      "expression": "crazy",
+      "text": "I MEAN????!?!?! YOU MEAN WHO WOULDNT?!?!?!",
+      "endType": "bad"
+    },
+
+    {
+      "id": "branch_bad_hall",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Okay then go walk with them.",
+      "next": "aiko_stung_reaction"
+    },
+    {
+      "id": "aiko_stung_reaction",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "…Oh. So that’s how it is.",
+      "next": "narrator_shift"
+    },
+    {
+      "id": "narrator_shift",
+      "speaker": "Narrator",
+      "text": "Aiko's steps slow. The teasing drains from her expression, replaced with something quieter… smaller.",
+      "next": "mc_recover_choice"
+    },
+
+    {
+      "id": "mc_recover_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Wait- I didn’t mean it like that.",
+          "next": "recover_apology",
+          "isCorrect": true
+        },
+        {
+          "text": "Well, you said people line up. Go pick one.",
+          "next": "branch_bad_hall_worse",
+          "isCorrect": false
+        },
+        {
+          "text": "I'm just messing with you. Come here.",
+          "next": "recover_playful",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "recover_apology",
+      "speaker": "You",
+      "expression": "sad",
+      "text": "Wait— I didn’t mean it like that. I was just being dumb.",
+      "next": "aiko_softens_apology"
+    },
+    {
+      "id": "aiko_softens_apology",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "…Then say what you meant instead of saying stuff like that.",
+      "next": "recover_merge"
+    },
+
+    {
+      "id": "recover_playful",
+      "speaker": "You",
+      "expression": "smug",
+      "text": "I'm just messing with you. Come here.",
+      "next": "aiko_reacts_playful"
+    },
+    {
+      "id": "aiko_reacts_playful",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "D-Don’t say it like that… You can't just—",
+      "next": "recover_merge"
+    },
+
+    {
+      "id": "recover_merge",
+      "speaker": "Narrator",
+      "text": "Aiko bumps your shoulder—lightly, barely there. But the tension eases, her steps falling back in sync with yours.",
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "branch_bad_hall_worse",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Well, you said people line up. Go pick one.",
+      "next": "aiko_hurt_bad"
+    },
+    {
+      "id": "aiko_hurt_bad",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "…Right. Got it.",
+      "next": "narrator_end_bad"
+    },
+    {
+      "id": "narrator_end_bad",
+      "speaker": "Narrator",
+      "text": "She pulls her hand away from you and walks ahead, not looking back once.",
+      "endType": "bad"
+    },
+
+
+    {
+      "id": "narrator_hallway_warm",
+      "speaker": "Narrator",
+      "text": "Aiko walks a little closer to you. The hallway noise fades under the warmth of the moment.",
+      "endType": "good"
+    }
+  ]
+}
