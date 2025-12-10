@@ -384,8 +384,17 @@ public class DialogueManager : MonoBehaviour
     void HandleZoomNode(DialogueNode node)
     {
         if (zoomInScript == null) return;
-        // Add zoom logic if needed
+
+        if (node.zoomType == "start")
+        {
+            zoomInScript.StartZoom(node.zoomTarget, node.zoomDuration);
+        }
+        else if (node.zoomType == "out")
+        {
+            zoomInScript.StartZoom(node.zoomTarget, node.zoomDuration);
+        }
     }
+
 
 
 
