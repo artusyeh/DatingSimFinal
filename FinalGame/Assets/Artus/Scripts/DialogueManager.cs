@@ -162,6 +162,8 @@ public class DialogueManager : MonoBehaviour
         // BLACKOUT (turn off bgm etc)
         HandleBlackout(currentNode);
 
+        
+
         // TIMER CONTROL
         if (!string.IsNullOrEmpty(currentNode.speaker) &&
             currentNode.speaker.StartsWith("TimerControl"))

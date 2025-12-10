@@ -39,7 +39,9 @@ public class DialogueNode
 
     public bool creepyAikoJumpscare;   
 
-    public string endType; // "good", "bad"   
+    public string endType; // "good", "bad"
+
+    public bool stopTimerAndHeartFX;
 }
 
 [Serializable]

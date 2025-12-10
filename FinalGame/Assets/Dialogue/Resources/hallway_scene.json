@@ -70,7 +70,7 @@
         {
           "text": "I mean… I like walking with you too.",
           "next": "branch_soft",
-          "isCorrect": true
+          "isCorrect": false
         }
       ]
     },
@@ -99,7 +99,7 @@
       "id": "aiko_soft_smile",
       "speaker": "Aiko",
       "expression": "crazy",
-      "text": "…Good. Because I like it too.",
+      "text": "I MEAN????!?!?! YOU MEAN WHO WOULDNT?!?!?!",
       "endType": "bad"
     },
 

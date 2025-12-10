@@ -30,7 +30,7 @@
         {
           "text": "Sorry, I didn’t realize.",
           "next": "branch_sorry",
-          "isCorrect": false
+          "isCorrect": true
         },
         {
           "text": "If I moved away… would you follow?",
@@ -198,7 +198,7 @@
       "id": "END_BAD",
       "speaker": "Narrator",
       "text": "The moment slips away. Aiko steps back, her expression unreadable.",
-      "endType": "bad"
+      "endType": "goood"
     }
   ]
 }
