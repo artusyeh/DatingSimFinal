@@ -1,0 +1,225 @@
+{
+  "startNode": "hall_start",
+  "nodes": [
+    {
+      "id": "hall_start",
+      "speaker": "Narrator",
+      "expression": "invisible",
+      "text": "The hallway buzzes with students rushing between classes as you and Aiko step out of the lecture room.",
+      "next": "aiko_comment_walk"
+    },
+
+    {
+      "id": "aiko_comment_walk",
+      "speaker": "Aiko",
+      "expression": "happy",
+      "text": "You know… I don’t usually ask people to walk with me. Feel honored.",
+      "next": "mc_reply_honor"
+    },
+    {
+      "id": "mc_reply_honor",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Oh? Am I supposed to feel special?",
+      "jumpscare": true,
+      "next": "aiko_tease_honor"
+    },
+
+    {
+      "id": "aiko_tease_honor",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "Obviously. My presence increases your social value by, like… three tiers at least.",
+      "next": "mc_social_status"
+    },
+
+    {
+      "id": "mc_social_status",
+      "speaker": "You",
+      "text": "...........???!",
+      "shake": "good",
+      "next": "aiko_fake_offended"
+    },
+
+    {
+      "id": "aiko_fake_offended",
+      "speaker": "Aiko",
+      "expression": "crazy",
+      "text": "Um, excuse me? I’ll have you know there are people who would line up just to walk with me.",
+      "next": "mc_teasing_choice_intro"
+    },
+
+    {
+      "id": "mc_teasing_choice_intro",
+      "speaker": "Narrator",
+      "expression": "crazy",
+      "text": "She leans in slightly, waiting for your response.",
+      "next": "mc_teasing_choice"
+    },
+
+    {
+      "id": "mc_teasing_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Then I better stay close before someone steals you.",
+          "next": "branch_flirty",
+          "isCorrect": true
+        },
+        {
+          "text": "…Did nobody else see what I just saw??????",
+          "next": "branch_soft",
+          "isCorrect": true
+        }
+      ]
+    },
+
+    {
+      "id": "branch_flirty",
+      "speaker": "You",
+      "text": "Then I better stay close before someone steals you.",
+      "next": "aiko_flustered"
+    },
+    {
+      "id": "aiko_flustered",
+      "speaker": "Aiko",
+      "expression": "shocked",
+      "text": "W-What?! No one is stealing me! Don’t even joke about that!",
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "branch_soft",
+      "speaker": "You",
+      "text": "I mean… I like walking with you too.",
+      "next": "aiko_soft_smile"
+    },
+    {
+      "id": "aiko_soft_smile",
+      "speaker": "Aiko",
+      "expression": "crazy",
+      "text": "Good. Then keep walking with me.",
+      "zoomType": "start",
+      "zoomTarget": 3.5,
+      "zoomDuration": 2,
+      "next": "narrator_hallway_warm"
+    },
+
+    {
+      "id": "narrator_hallway_warm",
+      "speaker": "crazy",
+      "text": "Aiko steps a little closer. The hallway noise fades beneath the warmth between you.",
+      "expression": "invisible",
+      "zoomType": "start",
+      "zoomTarget": 3.5,
+      "zoomDuration": 2,
+      "next": "aiko_jumpscare_one"
+    },
+
+    {
+      "id": "aiko_jumpscare_one",
+      "speaker": "Narrator",
+      "text": "The lights are out.",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_two"
+    },
+
+    {
+      "id": "aiko_jumpscare_two",
+      "speaker": "You",
+      "text": "Oh great.",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_three"
+    },
+
+    {
+      "id": "aiko_jumpscare_three",
+      "speaker": "You",
+      "text": "This is like one of those horror movies.",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_four"
+    },
+
+    {
+      "id": "aiko_jumpscare_four",
+      "speaker": "You",
+      "text": "Except I'm in it. Hahahahahahahahahahaha.",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_five"
+    },
+
+    {
+      "id": "aiko_jumpscare_five",
+      "speaker": "You",
+      "text": "This isn't funny anymore Aiko.",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_six"
+    },
+
+    {
+      "id": "aiko_jumpscare_six",
+      "speaker": "You",
+      "text": "......",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_seven"
+    },
+
+    {
+      "id": "aiko_jumpscare_seven",
+      "speaker": "You",
+      "text": "Uhhhhh Aiko?",
+      "expression": "invisible",
+      "blackout": true,
+      "next": "aiko_jumpscare_eight"
+    },
+
+  {
+  "id": "aiko_jumpscare_eight",
+  "speaker": "You",
+  "text": "......Huh...",
+  "expression": "evil",
+  "blackout": false,
+  "next": "aiko_jumpscare_nine"
+  },
+
+{
+  "id": "aiko_jumpscare_nine",
+  "speaker": "You",
+  "text": "Well that was out of the ordinary....",
+  "expression": "evil",
+  "zoomType": "out",
+  "zoomTarget": 3.5,
+  "zoomDuration": 2,
+  "next": "aiko_jumpscare_ten"
+},
+
+{
+  "id": "aiko_jumpscare_ten",
+  "speaker": "You",
+  "text": "Aiko what's with you—",
+  "expression": "crazy",
+  "creepyAikoJumpscare": true,
+  "next": "aiko_jumpscare_eleven"
+},
+
+{
+  "id": "aiko_jumpscare_eleven",
+  "speaker": "You",
+  "text": "....What the hell????",
+  "expression": "crazy",
+  "next": "aiko_jumpscare_eleven",
+  "endType": "bad"
+}
+
+
+
+  ]
+  
+}

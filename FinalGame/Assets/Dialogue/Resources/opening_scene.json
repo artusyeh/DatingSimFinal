@@ -25,7 +25,8 @@
       "id": "aiko_teasing_1",
       "speaker": "Aiko",
       "expression": "smug",
-      "text": "I swear, if sleeping were a major, you’d be top of the department the way you're snoozing!",
+      "text": "I swear, if sleeping were a major, you’d be top of the department the way you're snoozing...",
+      "shake": "good",
       "next": "mc_defensive_1"
     },
     {
@@ -59,6 +60,7 @@
       "id": "mc_show_what",
       "speaker": "You",
       "text": "Show WHAT?",
+      "shake": "good",
       "next": "aiko_document_1"
     },
     {
@@ -109,6 +111,7 @@
       "text": "Anyways we’re gonna be late for the next lecture if you lie here forever.",
       "next": "aiko_ask_walk"
     },
+
     {
       "id": "aiko_ask_walk",
       "speaker": "Aiko",
@@ -118,10 +121,11 @@
         {
           "text": "Yeah, sure. Let’s go!",
           "next": "branch_yes_walk",
-          "isCorrect": true
+          "isCorrect": true,
+          "delay": 3
         },
         {
-          "text": "I think I’ll go on my own...",
+          "text": "I'm good I think.",
           "next": "branch_no_walk",
           "isCorrect": false
         }
@@ -154,12 +158,13 @@
       "text": "STOP_AND_RESET_TIMER",
       "next": "good_walk_scene"
     },
+
     {
       "id": "good_walk_scene",
       "speaker": "Narrator",
       "expression": "happy",
-      "text": "You fall into step beside Aiko as you both head toward the next lecture."
-     
+      "text": "You fall into step beside Aiko as you both head toward the next lecture.",
+      "endType": "good"
     },
 
     {
@@ -200,6 +205,7 @@
       "speaker": "You",
       "expression": "sad",
       "text": "???????????",
+      "shake": "good",
       "next": "aiko_hurt_2"
     },
     {
@@ -282,6 +288,7 @@
       "speaker": "Aiko",
       "expression": "sad",
       "text": "Then why does it always sound like you’re putting me off?",
+      "shake": "good",
       "next": "mc_didnt_mean_merge"
     },
     {
@@ -294,7 +301,7 @@
     {
       "id": "opt1B_worse",
       "speaker": "You",
-      "text": "You’re overthinking this, Aiko.",
+      "text": "You're overthinking this, Aiko.",
       "next": "aiko_right_of_course"
     },
     {
@@ -327,9 +334,12 @@
     {
       "id": "aiko_see_you_class",
       "speaker": "Aiko",
-      "expression": "angry",
+      "expression": "happy",
       "text": "See you in class then.",
-      "next": "aiko_dont_be_late"
+      "next": "aiko_dont_be_late",
+      "zoomType": "start",
+      "zoomTarget": 3.5,
+      "zoomDuration": 5
     },
     {
       "id": "aiko_dont_be_late",
@@ -338,11 +348,12 @@
       "text": "Don’t be late…",
       "next": "bad_walk_scene_lock"
     },
+
     {
       "id": "bad_walk_scene_lock",
       "speaker": "TimerControl:ForceEnd",
-      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING"
-      
+      "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING",
+      "endType": "bad"
     },
 
     {
@@ -640,7 +651,7 @@
       "id": "bad_walk_scene_timer",
       "speaker": "TimerControl:Continue",
       "text": "BAD_OUTCOME_TIMER_KEEPS_RUNNING_UNTIL_ZERO",
-      "next": "END"
+      "endType": "bad"
     },
 
     {
