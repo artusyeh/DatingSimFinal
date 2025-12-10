@@ -40,9 +40,13 @@ public class TitleAnimation : MonoBehaviour
     IEnumerator PlaySequence()
     {
         yield return StartCoroutine(FadeIn(title, fadeDuration));
-        //  yield return new WaitForSeconds(delayBetween);
-        yield return StartCoroutine(DropIn(clockRect, clockCanvasGroup, dropDuration)); yield return new WaitForSeconds(delayBetween);
-        yield return StartCoroutine(FadeIn(heartCanvasGroup, heartDuration));
+        yield return StartCoroutine(DropIn(clockRect, clockCanvasGroup, dropDuration));
+        yield return new WaitForSeconds(delayBetween);
+
+        StartCoroutine(FadeIn(heartCanvasGroup, heartDuration));
+        buttonAnimator.Play();
+
+        yield return new WaitForSeconds(heartDuration);
 
         if (flashImage != null)
             yield return StartCoroutine(ScreenFlash());
@@ -76,9 +80,9 @@ public class TitleAnimation : MonoBehaviour
             t += Time.deltaTime;
             float progress = t / duration;
             float eased = 1f - Mathf.Pow(1f - progress, 3f);
+
             rt.anchoredPosition = Vector2.Lerp(startPos, endPos, eased);
             cg.alpha = eased;
-
 
             yield return null;
         }
@@ -86,6 +90,7 @@ public class TitleAnimation : MonoBehaviour
         rt.anchoredPosition = endPos;
         cg.alpha = 1;
     }
+
     IEnumerator ScreenFlash()
     {
         float half = flashDuration / 2f;
@@ -101,6 +106,7 @@ public class TitleAnimation : MonoBehaviour
         }
 
         t = 0f;
+        // Fade out
         while (t < half)
         {
             t += Time.deltaTime;
@@ -108,6 +114,7 @@ public class TitleAnimation : MonoBehaviour
             flashImage.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }
+
         flashImage.color = new Color(1f, 1f, 1f, 0f);
     }
 }

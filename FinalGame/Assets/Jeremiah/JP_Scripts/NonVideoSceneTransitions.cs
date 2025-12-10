@@ -33,7 +33,7 @@ public class NonVideoSceneTransitions : MonoBehaviour, IPointerEnterHandler
         SceneManager.LoadScene(sceneIndex);
     }
 
-    IEnumerator LoadSceneByNameCoroutine(string sceneName)
+   public IEnumerator LoadSceneByNameCoroutine(string sceneName)
     {
         if (transition != null)
             transition.SetTrigger("Start");

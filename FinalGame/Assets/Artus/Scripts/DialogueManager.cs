@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Transactions;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class DialogueManager : MonoBehaviour
 {
@@ -45,6 +47,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Ending Scenes")]
     public string goodEndingSceneName;
     public string badEndingSceneName;
+    [SerializeField] NonVideoSceneTransitions transitionManager;
 
 
     [Header("Jumpscare 1 (Video)")]
@@ -212,13 +215,17 @@ public class DialogueManager : MonoBehaviour
     {
         if (type == "good" && !string.IsNullOrEmpty(goodEndingSceneName))
         {
-            SceneManager.LoadScene(goodEndingSceneName);
+           //SceneManager.LoadScene(goodEndingSceneName);
+            transitionManager.LoadSceneByName(goodEndingSceneName);
             return;
+
+           // return;
         }
 
         if (type == "bad" && !string.IsNullOrEmpty(badEndingSceneName))
         {
-            SceneManager.LoadScene(badEndingSceneName);
+           // SceneManager.LoadScene(badEndingSceneName);
+            transitionManager.LoadSceneByName(badEndingSceneName);
             return;
         }
 
