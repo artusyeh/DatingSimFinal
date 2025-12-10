@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/START.unity
     guid: 0a22ecc235a78a54482cdbe0d2ef3249
   - enabled: 1
-    path: Assets/Jeremiah/MockTitleScreen.unity
+    path: Assets/Scenes/MockTitleScreen.unity
     guid: 5f4783fe351228646888a427548e9fd7
   - enabled: 1
     path: Assets/Scenes/Scene_1.unity

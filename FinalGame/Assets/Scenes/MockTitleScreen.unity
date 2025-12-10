@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 497054098}
   - component: {fileID: 497054097}
   - component: {fileID: 497054100}
+  - component: {fileID: 497054101}
   m_Layer: 5
   m_Name: StartTest
   m_TagString: Untagged
@@ -951,7 +952,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.7830189, g: 0.7793254, b: 0.7793254, a: 1}
+    m_HighlightedColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1050,6 +1051,21 @@ MonoBehaviour:
   audioSource: {fileID: 2059726338}
   hoverSound: {fileID: 8300000, guid: f6336bd9789192b4f9ce0268f78bbed2, type: 3}
   clickSound: {fileID: 0}
+  canvasGroup: {fileID: 497054101}
+  flashSpeed: 5
+  flashStrength: 0.2
+--- !u!225 &497054101
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497054095}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &607596020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1395,7 @@ GameObject:
   - component: {fileID: 1077758507}
   - component: {fileID: 1077758506}
   - component: {fileID: 1077758509}
+  - component: {fileID: 1077758510}
   m_Layer: 5
   m_Name: QuitTest
   m_TagString: Untagged
@@ -1428,7 +1445,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.764151, g: 0.7605465, b: 0.7605465, a: 1}
+    m_HighlightedColor: {r: 0.9372549, g: 0.9372549, b: 0.9372549, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1527,6 +1544,21 @@ MonoBehaviour:
   audioSource: {fileID: 2059726338}
   hoverSound: {fileID: 8300000, guid: f6336bd9789192b4f9ce0268f78bbed2, type: 3}
   clickSound: {fileID: 0}
+  canvasGroup: {fileID: 1077758510}
+  flashSpeed: 5
+  flashStrength: 0.2
+--- !u!225 &1077758510
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077758504}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1166027977
 GameObject:
   m_ObjectHideFlags: 0
