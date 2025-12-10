@@ -41,16 +41,12 @@ public class DialogueManager : MonoBehaviour
     [Header("Screen Shake")]
     public TestScreenShake shaker;
 
-    // ---------------------------------------------------
-    //                    ENDING SUPPORT
-    // ---------------------------------------------------
+
     [Header("Ending Scenes")]
     public string goodEndingSceneName;
     public string badEndingSceneName;
 
-    // ---------------------------------------------------
-    //                    JUMPSCARE SYSTEM
-    // ---------------------------------------------------
+
     [Header("Jumpscare 1 (Video)")]
     public GameObject jumpscareVideoObject;
     public float jumpscareDuration = 2f;
@@ -65,9 +61,6 @@ public class DialogueManager : MonoBehaviour
     [Header("Jumpscare 2 Hide Objects")]
     public GameObject[] jumpscare2HideObjects;
 
-    // ---------------------------------------------------
-    //               CREEPY AIKO JUMPSCARE
-    // ---------------------------------------------------
     [Header("Creepy Aiko Jumpscare")]
     public GameObject creepyAiko;
     public float creepySlideDistance = 6f;
@@ -77,9 +70,6 @@ public class DialogueManager : MonoBehaviour
     public AudioSource creepyAikoSFXSource;
     public AudioClip creepyAikoSFXClip;
 
-    // ---------------------------------------------------
-    //                        BLACKOUT
-    // ---------------------------------------------------
     [Header("Blackout")]
     public GameObject blackoutObject;
     public AudioSource blackoutSFXSource;
@@ -145,9 +135,11 @@ public class DialogueManager : MonoBehaviour
         GoToNode(dialogueRoot.startNode);
     }
 
-    // ---------------------------------------------------------
+
+
+
+
     //                     MAIN NODE HANDLER
-    // ---------------------------------------------------------
     void GoToNode(string nodeId)
     {
         StopTypingIfNeeded();
@@ -211,9 +203,11 @@ public class DialogueManager : MonoBehaviour
         StartTyping(currentNode.text);
     }
 
-    // ---------------------------------------------------------
+
+
+
+
     //                      ENDING SYSTEM
-    // ---------------------------------------------------------
     void HandleEnding(string type)
     {
         if (type == "good" && !string.IsNullOrEmpty(goodEndingSceneName))
@@ -231,9 +225,12 @@ public class DialogueManager : MonoBehaviour
         Debug.LogWarning("ENDING TYPE SET BUT NO SCENE ASSIGNED!");
     }
 
-    // ---------------------------------------------------------
-    //               CREEPY AIKO SLIDE-UP JUMPSCARE
-    // ---------------------------------------------------------
+
+
+
+
+
+    //               CREEPY AIKO SLIDE UP JUMPSCARE
     void HandleCreepyAikoJumpscare(DialogueNode node)
     {
         waitingForClick = false;
@@ -273,9 +270,11 @@ public class DialogueManager : MonoBehaviour
         GoToNode(node.next);
     }
 
-    // ---------------------------------------------------------
+
+
+
+
     //                        JUMPSCARE 2
-    // ---------------------------------------------------------
     IEnumerator PlayJumpscare2ThenContinue(DialogueNode node)
     {
         if (jumpscare2HideObjects != null)
@@ -295,9 +294,11 @@ public class DialogueManager : MonoBehaviour
         GoToNode(node.next);
     }
 
-    // ---------------------------------------------------------
+
+
+
+
     //                     JUMPSCARE 1
-    // ---------------------------------------------------------
     void HandleJumpscare1(DialogueNode node)
     {
         if (jumpscare1HideObjects != null)
@@ -321,9 +322,11 @@ public class DialogueManager : MonoBehaviour
         GoToNode(node.next);
     }
 
-    // ---------------------------------------------------------
+
+
+
+
     //                       BLACKOUT
-    // ---------------------------------------------------------
     void HandleBlackout(DialogueNode node)
     {
         if (blackoutObject == null) return;
@@ -342,9 +345,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // ---------------------------------------------------------
+
+
+
+
+
+
     //                   SHAKE / TIMER / ZOOM
-    // ---------------------------------------------------------
     void HandleShake(DialogueNode node)
     {
         if (shaker == null || string.IsNullOrEmpty(node.shake)) return;
@@ -367,9 +374,12 @@ public class DialogueManager : MonoBehaviour
         // Add zoom logic if needed
     }
 
-    // ---------------------------------------------------------
+
+
+
+
+
     //                 TYPEWRITER + CHOICES
-    // ---------------------------------------------------------
     void StartTyping(string text)
     {
         StopTypingIfNeeded();
@@ -442,9 +452,50 @@ public class DialogueManager : MonoBehaviour
     void CreateChoiceButton(Choice choice)
     {
         Button btn = Instantiate(choiceButtonPrefab, choicesContainer);
-        btn.GetComponentInChildren<TMP_Text>().text = choice.text;
+        TMP_Text btnText = btn.GetComponentInChildren<TMP_Text>();
+
+        if (btnText != null)
+            btnText.text = choice.text;
+
+        // New: Make delayed choices invisible until delay is over
+        if (choice.delay > 0f)
+        {
+            // Disable interaction
+            btn.interactable = false;
+
+            // Hide visually AND from layout
+            CanvasGroup cg = btn.gameObject.GetComponent<CanvasGroup>();
+            if (cg == null) cg = btn.gameObject.AddComponent<CanvasGroup>();
+
+            cg.alpha = 0f;            // Invisible
+            cg.blocksRaycasts = false; // Cannot click
+            cg.interactable = false;
+
+            StartCoroutine(ShowButtonAfterDelay(btn, cg, choice.delay));
+        }
+        else
+        {
+            // Immediate choices appear normally
+            btn.interactable = true;
+        }
+
         btn.onClick.AddListener(() => HandleChoiceSelection(choice));
     }
+
+
+    IEnumerator ShowButtonAfterDelay(Button btn, CanvasGroup cg, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Fadein instantly or change alpha to 1
+        cg.alpha = 1f;
+        cg.blocksRaycasts = true;
+        cg.interactable = true;
+
+        btn.interactable = true;
+    }
+
+
 
     void HandleChoiceSelection(Choice choice)
     {
