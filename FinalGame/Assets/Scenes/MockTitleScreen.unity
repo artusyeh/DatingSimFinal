@@ -1235,6 +1235,10 @@ MonoBehaviour:
   dropHeight: 200
   buttonAnimator: {fileID: 321444469}
   buttonContainerAnimator: {fileID: 321444471}
+  buttons:
+  - {fileID: 497054096}
+  - {fileID: 1077758505}
+  buttonMoveDistance: 200
   flashImage: {fileID: 1733973692}
   flashDuration: 0.25
 --- !u!225 &754130134
