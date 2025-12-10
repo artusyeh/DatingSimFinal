@@ -383,7 +383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -21.900055, y: -130.87}
+  m_AnchoredPosition: {x: -21.900055, y: -130.86996}
   m_SizeDelta: {x: -224.77, y: -329.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &136111309
@@ -1247,9 +1247,24 @@ MonoBehaviour:
   timerScript: {fileID: 2092892962}
   zoomInScript: {fileID: 1307471491}
   aikoCharacter: {fileID: 1644592230}
+  shaker: {fileID: 1307471490}
+  goodEndingSceneName: Scene_2
+  badEndingSceneName: Scene_KNIFE
+  jumpscareVideoObject: {fileID: 0}
+  objectsToHide: []
+  jumpscareDuration: 2
+  jumpscare2VideoObject: {fileID: 0}
+  jumpscare2Duration: 2
+  creepyAiko: {fileID: 0}
+  creepySlideDistance: 6
+  creepySlideSpeed: 6
+  creepyHoldTime: 1.2
+  creepyAikoSFXSource: {fileID: 0}
+  creepyAikoSFXClip: {fileID: 0}
+  blackoutObject: {fileID: 0}
+  blackoutSFXSource: {fileID: 0}
+  blackoutSFXClip: {fileID: 0}
   bgmSource: {fileID: 1738840020}
-  sceneTransition: {fileID: 1850282630}
-  faceTarget: {fileID: 1574960128}
 --- !u!4 &1203375194
 Transform:
   m_ObjectHideFlags: 0
@@ -1446,6 +1461,10 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 1257082322}
+    - target: {fileID: 2818865818632279640, guid: 6f7eaaf8463a5234db85530df0864165, type: 3}
+      propertyPath: transitionTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3277848926304120997, guid: 6f7eaaf8463a5234db85530df0864165, type: 3}
       propertyPath: m_Name
       value: LevelLoader
@@ -2652,6 +2671,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 1257082322}
   transitionTime: 1
+  audioSource: {fileID: 0}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
 --- !u!4 &1850282631
 Transform:
   m_ObjectHideFlags: 0

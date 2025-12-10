@@ -1247,9 +1247,24 @@ MonoBehaviour:
   timerScript: {fileID: 2092892962}
   zoomInScript: {fileID: 1307471491}
   aikoCharacter: {fileID: 1644592233}
+  shaker: {fileID: 1307471490}
+  goodEndingSceneName: Scene_3
+  badEndingSceneName: Scene_H
+  jumpscareVideoObject: {fileID: 0}
+  objectsToHide: []
+  jumpscareDuration: 2
+  jumpscare2VideoObject: {fileID: 0}
+  jumpscare2Duration: 2
+  creepyAiko: {fileID: 0}
+  creepySlideDistance: 6
+  creepySlideSpeed: 6
+  creepyHoldTime: 1.2
+  creepyAikoSFXSource: {fileID: 0}
+  creepyAikoSFXClip: {fileID: 0}
+  blackoutObject: {fileID: 0}
+  blackoutSFXSource: {fileID: 0}
+  blackoutSFXClip: {fileID: 0}
   bgmSource: {fileID: 1738840020}
-  sceneTransition: {fileID: 1850282630}
-  faceTarget: {fileID: 1574960128}
 --- !u!4 &1203375194
 Transform:
   m_ObjectHideFlags: 0
@@ -2651,6 +2666,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 1257082322}
   transitionTime: 1
+  audioSource: {fileID: 0}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
 --- !u!4 &1850282631
 Transform:
   m_ObjectHideFlags: 0

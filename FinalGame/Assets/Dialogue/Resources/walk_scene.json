@@ -184,7 +184,21 @@
       "speaker": "Aiko",
       "expression": "happy2",
       "text": "…You’re really something, y’know that?",
-      "next": "END"
+      "next": "END_GOOD"
+    },
+
+    {
+      "id": "END_GOOD",
+      "speaker": "Narrator",
+      "text": "You and Aiko continue walking, closer than before.",
+      "endType": "good"
+    },
+
+    {
+      "id": "END_BAD",
+      "speaker": "Narrator",
+      "text": "The moment slips away. Aiko steps back, her expression unreadable.",
+      "endType": "bad"
     }
   ]
 }
