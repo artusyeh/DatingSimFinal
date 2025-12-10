@@ -86,6 +86,7 @@
       "speaker": "Aiko",
       "expression": "shocked",
       "text": "W–Who’s stealing me?? Absolutely no one is stealing me!",
+      "stopTimerAndHeartFX": true,
       "next": "narrator_hallway_warm"
     },
 
@@ -175,6 +176,7 @@
       "speaker": "Aiko",
       "expression": "blushing",
       "text": "D-Don’t say it like that… You can't just—",
+      "stopTimerAndHeartFX": true,
       "next": "recover_merge"
     },
 
