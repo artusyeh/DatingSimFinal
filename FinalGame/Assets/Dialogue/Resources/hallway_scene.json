@@ -59,7 +59,8 @@
         {
           "text": "Then I better stay close before someone steals you.",
           "next": "branch_flirty",
-          "isCorrect": true
+          "isCorrect": true,
+          "delay": 3
         },
         {
           "text": "Okay then go walk with them.",
@@ -129,7 +130,7 @@
       "text": "",
       "choices": [
         {
-          "text": "Wait— I didn’t mean it like that.",
+          "text": "Wait- I didn’t mean it like that.",
           "next": "recover_apology",
           "isCorrect": true
         },

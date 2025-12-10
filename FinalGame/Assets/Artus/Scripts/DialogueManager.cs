@@ -496,11 +496,31 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+    //                 CHOICE HANDLER   
 
     void HandleChoiceSelection(Choice choice)
     {
-        if (!choice.isCorrect)
+        // CORRECT CHOICE
+        if (choice.isCorrect)
+        {
+            // Pause the timer
+            timerScript?.StopTimer();
+
+            // Positive FX
+            timerScript?.PlayHeartFX();
+        }
+        else
+        {
+            // WRONG CHOICE
+
+            // Stop the BGM immediately
+            if (bgmSource != null)
+                bgmSource.Stop();
+
+            // Negative FX
             timerScript?.PlayHeartbreakFX();
+            timerScript?.StartTimer(false);
+        }
 
         ClearChoices();
         GoToNode(choice.next);
