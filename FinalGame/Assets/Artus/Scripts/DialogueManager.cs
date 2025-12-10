@@ -51,15 +51,19 @@ public class DialogueManager : MonoBehaviour
     // ---------------------------------------------------
     //                    JUMPSCARE SYSTEM
     // ---------------------------------------------------
-    [Header("Video Jumpscare")]
+    [Header("Jumpscare 1 (Video)")]
     public GameObject jumpscareVideoObject;
-    [Tooltip("Objects to hide during jumpscares (video 1 and video 2).")]
-    public GameObject[] objectsToHide;
     public float jumpscareDuration = 2f;
+
+    [Header("Jumpscare 1 Hide Objects")]
+    public GameObject[] jumpscare1HideObjects;
 
     [Header("Jumpscare 2 (After Creepy Aiko)")]
     public GameObject jumpscare2VideoObject;
     public float jumpscare2Duration = 2f;
+
+    [Header("Jumpscare 2 Hide Objects")]
+    public GameObject[] jumpscare2HideObjects;
 
     // ---------------------------------------------------
     //               CREEPY AIKO JUMPSCARE
@@ -94,6 +98,7 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping = false;
     private string fullText = "";
     private Coroutine typingCoroutine;
+
 
     void Start()
     {
@@ -159,7 +164,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // BLACKOUT
+        // BLACKOUT (turn off bgm etc)
         HandleBlackout(currentNode);
 
         // TIMER CONTROL
@@ -183,10 +188,10 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // NORMAL VIDEO JUMPSCARE
+        // NORMAL JUMPSCARE 1
         if (currentNode.jumpscare)
         {
-            HandleJumpscareNode(currentNode);
+            HandleJumpscare1(currentNode);
             return;
         }
 
@@ -236,16 +241,8 @@ public class DialogueManager : MonoBehaviour
         if (creepyAikoSFXSource && creepyAikoSFXClip)
             creepyAikoSFXSource.PlayOneShot(creepyAikoSFXClip);
 
-        if (creepyAiko != null)
-        {
-            creepyAiko.SetActive(true);
-            StartCoroutine(CreepyAikoRoutine(node));
-        }
-        else
-        {
-            // fallback if object missing
-            GoToNode(node.next);
-        }
+        creepyAiko.SetActive(true);
+        StartCoroutine(CreepyAikoRoutine(node));
     }
 
     IEnumerator CreepyAikoRoutine(DialogueNode node)
@@ -266,8 +263,8 @@ public class DialogueManager : MonoBehaviour
         creepyAiko.transform.localPosition = start;
         creepyAiko.SetActive(false);
 
-        // Trigger Jumpscare 2 if it exists
-        if (jumpscare2VideoObject != null)
+        // Play Jumpscare 2 afterwards
+        if (jumpscare2VideoObject)
         {
             StartCoroutine(PlayJumpscare2ThenContinue(node));
             yield break;
@@ -276,14 +273,14 @@ public class DialogueManager : MonoBehaviour
         GoToNode(node.next);
     }
 
+    // ---------------------------------------------------------
+    //                        JUMPSCARE 2
+    // ---------------------------------------------------------
     IEnumerator PlayJumpscare2ThenContinue(DialogueNode node)
     {
-        // Hide UI / objects while jumpscare2 plays
-        if (objectsToHide != null)
-        {
-            foreach (var obj in objectsToHide)
+        if (jumpscare2HideObjects != null)
+            foreach (var obj in jumpscare2HideObjects)
                 if (obj != null) obj.SetActive(false);
-        }
 
         jumpscare2VideoObject.SetActive(true);
 
@@ -291,12 +288,35 @@ public class DialogueManager : MonoBehaviour
 
         jumpscare2VideoObject.SetActive(false);
 
-        // Restore hidden objects
-        if (objectsToHide != null)
-        {
-            foreach (var obj in objectsToHide)
+        if (jumpscare2HideObjects != null)
+            foreach (var obj in jumpscare2HideObjects)
                 if (obj != null) obj.SetActive(true);
-        }
+
+        GoToNode(node.next);
+    }
+
+    // ---------------------------------------------------------
+    //                     JUMPSCARE 1
+    // ---------------------------------------------------------
+    void HandleJumpscare1(DialogueNode node)
+    {
+        if (jumpscare1HideObjects != null)
+            foreach (var obj in jumpscare1HideObjects)
+                if (obj != null) obj.SetActive(false);
+
+        jumpscareVideoObject.SetActive(true);
+        StartCoroutine(Jumpscare1Routine(node));
+    }
+
+    IEnumerator Jumpscare1Routine(DialogueNode node)
+    {
+        yield return new WaitForSeconds(jumpscareDuration);
+
+        jumpscareVideoObject.SetActive(false);
+
+        if (jumpscare1HideObjects != null)
+            foreach (var obj in jumpscare1HideObjects)
+                if (obj != null) obj.SetActive(true);
 
         GoToNode(node.next);
     }
@@ -323,38 +343,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // ---------------------------------------------------------
-    //                NORMAL VIDEO JUMPSCARE
-    // ---------------------------------------------------------
-    void HandleJumpscareNode(DialogueNode node)
-    {
-        if (objectsToHide != null)
-        {
-            foreach (var obj in objectsToHide)
-                if (obj != null) obj.SetActive(false);
-        }
-
-        jumpscareVideoObject.SetActive(true);
-
-        StartCoroutine(JumpscareRoutine(node));
-    }
-
-    IEnumerator JumpscareRoutine(DialogueNode node)
-    {
-        yield return new WaitForSeconds(jumpscareDuration);
-
-        jumpscareVideoObject.SetActive(false);
-
-        if (objectsToHide != null)
-        {
-            foreach (var obj in objectsToHide)
-                if (obj != null) obj.SetActive(true);
-        }
-
-        GoToNode(node.next);
-    }
-
-    // ---------------------------------------------------------
-    //                    SHAKE / TIMER / ZOOM
+    //                   SHAKE / TIMER / ZOOM
     // ---------------------------------------------------------
     void HandleShake(DialogueNode node)
     {
@@ -366,8 +355,6 @@ public class DialogueManager : MonoBehaviour
 
     void HandleTimerControlNode(DialogueNode node)
     {
-        if (timerScript == null) return;
-
         if (node.speaker == "TimerControl:Stop")
             timerScript.ResetTimer();
         else if (node.speaker == "TimerControl:Continue")
@@ -377,7 +364,7 @@ public class DialogueManager : MonoBehaviour
     void HandleZoomNode(DialogueNode node)
     {
         if (zoomInScript == null) return;
-        // Put zoom logic here if needed later
+        // Add zoom logic if needed
     }
 
     // ---------------------------------------------------------
@@ -456,7 +443,6 @@ public class DialogueManager : MonoBehaviour
     {
         Button btn = Instantiate(choiceButtonPrefab, choicesContainer);
         btn.GetComponentInChildren<TMP_Text>().text = choice.text;
-
         btn.onClick.AddListener(() => HandleChoiceSelection(choice));
     }
 

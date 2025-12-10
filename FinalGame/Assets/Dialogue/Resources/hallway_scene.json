@@ -97,9 +97,9 @@
     {
       "id": "aiko_soft_smile",
       "speaker": "Aiko",
-      "expression": "smug",
+      "expression": "crazy",
       "text": "…Good. Because I like it too.",
-      "next": "narrator_hallway_warm"
+      "endType": "bad"
     },
 
     {

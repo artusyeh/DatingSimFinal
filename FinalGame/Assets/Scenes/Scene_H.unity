@@ -1427,13 +1427,16 @@ MonoBehaviour:
   goodEndingSceneName: Scene_1
   badEndingSceneName: Scene_1
   jumpscareVideoObject: {fileID: 1233505375}
-  objectsToHide:
+  jumpscareDuration: 2
+  jumpscare1HideObjects:
+  - {fileID: 834930983}
+  - {fileID: 1243265661}
+  jumpscare2VideoObject: {fileID: 1410428436}
+  jumpscare2Duration: 2
+  jumpscare2HideObjects:
   - {fileID: 834930983}
   - {fileID: 1243265661}
   - {fileID: 1639438377}
-  jumpscareDuration: 2
-  jumpscare2VideoObject: {fileID: 1410428436}
-  jumpscare2Duration: 2
   creepyAiko: {fileID: 79803617}
   creepySlideDistance: 12
   creepySlideSpeed: 6
