@@ -162,7 +162,11 @@ public class DialogueManager : MonoBehaviour
         // BLACKOUT (turn off bgm etc)
         HandleBlackout(currentNode);
 
-        
+        if(currentNode.stopTimerAndHeartFX)
+        {
+            timerScript?.StopTimer();
+            timerScript?.PlayHeartFX();
+        }
 
         // TIMER CONTROL
         if (!string.IsNullOrEmpty(currentNode.speaker) &&
@@ -380,8 +384,17 @@ public class DialogueManager : MonoBehaviour
     void HandleZoomNode(DialogueNode node)
     {
         if (zoomInScript == null) return;
-        // Add zoom logic if needed
+
+        if (node.zoomType == "start")
+        {
+            zoomInScript.StartZoom(node.zoomTarget, node.zoomDuration);
+        }
+        else if (node.zoomType == "out")
+        {
+            zoomInScript.StartZoom(node.zoomTarget, node.zoomDuration);
+        }
     }
+
 
 
 
@@ -509,29 +522,17 @@ public class DialogueManager : MonoBehaviour
 
     void HandleChoiceSelection(Choice choice)
     {
-        // CORRECT CHOICE
-        if (choice.isCorrect)
+        // WRONG CHOICE
+        if (!choice.isCorrect)
         {
-            // Pause the timer
-            timerScript?.StopTimer();
-
-            // Positive FX
-            timerScript?.PlayHeartFX();
-        }
-        else
-        {
-            // WRONG CHOICE
-
-            // Stop the BGM immediately
-            if (bgmSource != null)
-                bgmSource.Stop();
-
-            // Negative FX
+            bgmSource?.Stop();
             timerScript?.PlayHeartbreakFX();
             timerScript?.StartTimer(false);
         }
 
+        // CORRECT choices no longer stop timer — the JSON node now decides
         ClearChoices();
         GoToNode(choice.next);
+
     }
 }

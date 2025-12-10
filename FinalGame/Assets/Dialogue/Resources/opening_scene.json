@@ -143,6 +143,7 @@
       "speaker": "Aiko",
       "expression": "happy",
       "text": "(Brightens instantly)",
+      "stopTimerAndHeartFX": true,
       "next": "aiko_knew_it"
     },
     {
@@ -428,6 +429,7 @@
       "id": "mc_no_later",
       "speaker": "You",
       "text": "No “later.” Let’s go.",
+      "stopTimerAndHeartFX": true,
       "next": "aiko_dont_regret"
     },
     {
@@ -552,6 +554,7 @@
       "speaker": "Aiko",
       "expression": "blushing",
       "text": "…You better.",
+      "stopTimerAndHeartFX": true,
       "next": "narrator_sigh_smile"
     },
     {
