@@ -152,6 +152,7 @@
       "speaker": "You",
       "expression": "sad",
       "text": "Wait— I didn’t mean it like that. I was just being dumb.",
+      "stopTimerAndHeartFX": true,
       "next": "aiko_softens_apology"
     },
     {
