@@ -759,6 +759,7 @@
       "speaker": "Aiko",
       "expression": "happy",
       "text": "If you’re coming, then come. If not, I’ll go ahead.",
+      "stopTimerAndHeartFX": true,
       "next": "timer_stop_3B"
     },
     {
