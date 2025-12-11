@@ -67,19 +67,28 @@ public class TitleAnimation : MonoBehaviour
         cg.alpha = 1;
     }
 
+    // ----------------------------
+    // NEW BOUNCE DROP-IN ANIMATION
+    // ----------------------------
     IEnumerator DropIn(RectTransform rt, CanvasGroup cg, float duration)
     {
         Vector2 endPos = rt.anchoredPosition;
         Vector2 startPos = endPos + new Vector2(0, dropHeight);
-        rt.anchoredPosition = startPos;
-        cg.alpha = 0;
 
-        float t = 0;
+        rt.anchoredPosition = startPos;
+        cg.alpha = 0f;
+
+        float t = 0f;
+        float s = 1.70158f; // bounce strength
+
         while (t < duration)
         {
             t += Time.deltaTime;
             float progress = t / duration;
-            float eased = 1f - Mathf.Pow(1f - progress, 3f);
+
+            // EaseOutBack bounce
+            float eased = 1f + (--progress) * progress * ((s + 1f) * progress + s);
+            eased = Mathf.Clamp01(eased);
 
             rt.anchoredPosition = Vector2.Lerp(startPos, endPos, eased);
             cg.alpha = eased;
@@ -87,8 +96,13 @@ public class TitleAnimation : MonoBehaviour
             yield return null;
         }
 
+        // OPTIONAL: Squash + stretch impact bounce for extra juice
+        rt.localScale = new Vector3(1.05f, 0.95f, 1f);
+        yield return new WaitForSeconds(0.05f);
+        rt.localScale = Vector3.one;
+
         rt.anchoredPosition = endPos;
-        cg.alpha = 1;
+        cg.alpha = 1f;
     }
 
     IEnumerator ScreenFlash()
