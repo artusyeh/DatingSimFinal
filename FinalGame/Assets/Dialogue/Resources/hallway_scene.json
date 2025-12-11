@@ -60,7 +60,7 @@
           "text": "Then I better stay close before someone steals you.",
           "next": "branch_flirty",
           "isCorrect": true,
-          "delay": 3
+          "delay": 7
         },
         {
           "text": "Okay then go walk with them.",
@@ -133,7 +133,8 @@
         {
           "text": "Wait- I didn’t mean it like that.",
           "next": "recover_apology",
-          "isCorrect": true
+          "isCorrect": true,
+          "delay": 3
         },
         {
           "text": "Well, you said people line up. Go pick one.",
