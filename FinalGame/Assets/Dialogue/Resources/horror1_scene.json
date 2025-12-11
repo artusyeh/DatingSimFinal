@@ -109,7 +109,7 @@
 
     {
       "id": "narrator_hallway_warm",
-      "speaker": "crazy",
+      "speaker": "Narrator",
       "text": "Aiko steps a little closer. The hallway noise fades beneath the warmth between you.",
       "expression": "invisible",
       "zoomType": "start",
