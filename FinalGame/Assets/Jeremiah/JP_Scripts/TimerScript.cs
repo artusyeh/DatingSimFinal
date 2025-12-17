@@ -13,6 +13,10 @@ public class TimerScript : MonoBehaviour
     [SerializeField] ParticleSystem heartParticles;
     [SerializeField] TestScreenShake screenShake;
 
+    [Header("Jumpscare clip")]
+    [SerializeField] string jumpscareSceneName;
+
+
     [Header("Audio")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip urgentTickClip;
@@ -195,6 +199,21 @@ public class TimerScript : MonoBehaviour
         if (dm != null)
             dm.enabled = false;
     }
+
+    /* void EndGame()
+    {
+        enabled = false;
+        isBlinking = false;
+
+        if (timerText != null)
+            timerText.color = Color.white;
+
+        // Load jumpscare scene
+        if (!string.IsNullOrEmpty(jumpscareSceneName))
+        {
+            SceneManager.LoadScene(jumpscareSceneName);
+        }
+    } */
 
     public void RestartScene()
     {
