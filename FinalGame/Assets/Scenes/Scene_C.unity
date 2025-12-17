@@ -1154,7 +1154,7 @@ MonoBehaviour:
   dialogueBoxImage: {fileID: 136111309}
   mcBoxSprite: {fileID: 4114697686601932199, guid: 0c95744413d1cca4b95486ed07d625c0, type: 3}
   aikoBoxSprite: {fileID: -327818743068282864, guid: b2a1b6d11def97745913969802538359, type: 3}
-  dialogueFileName: opening_scene
+  dialogueFileName: confession_scene
   typewriterSpeed: 0.04
   typeSFXSource: {fileID: 1862289369}
   typeSFXClip: {fileID: 8300000, guid: 764e8e341639f0e46b2a0503131a3037, type: 3}
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   zoomInScript: {fileID: 1307471491}
   aikoCharacter: {fileID: 1644592230}
   shaker: {fileID: 1307471490}
-  goodEndingSceneName: Scene_2
+  goodEndingSceneName: Scene_Title
   badEndingSceneName: Scene_KNIFE
   transitionManager: {fileID: 1850282630}
   jumpscareVideoObject: {fileID: 0}
@@ -1342,7 +1342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7266450482845084364, guid: a0eb562d41a6ca44bbb817275735f1fb, type: 3}
+  m_Sprite: {fileID: -91903354144237191, guid: db49d59cb6bae2c429134b58f60991dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2028,7 +2028,7 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: f8aaf2157600de04dbb866dc79500a9a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
-  m_Pitch: 1
+  m_Pitch: 0.85
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -2621,12 +2621,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7883791
+      objectReference: {fileID: 0}
+    - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7883791
+      objectReference: {fileID: 0}
+    - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7883791
+      objectReference: {fileID: 0}
+    - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6200841
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1
+      value: -2.28
       objectReference: {fileID: 0}
     - target: {fileID: 709569169466316184, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2705,12 +2717,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2311178877110563303, guid: 1dbcac79dfae0cf4d9b6de3d1dfeb3ee, type: 3}
     - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: aiko_invisible
+      value: 
+      objectReference: {fileID: 8890691845753528624, guid: 9a863b3a5f24c50409f4fcfc0e99926c, type: 3}
+    - target: {fileID: 1445660768489452736, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1644592229}
     - target: {fileID: 1968223444027632361, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
       propertyPath: m_Name
       value: Aiko Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9009434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.g
+      value: 0.97620434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967463336192063785, guid: 5196e56e38f1fa34b9cfcbf9ca0cf664, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

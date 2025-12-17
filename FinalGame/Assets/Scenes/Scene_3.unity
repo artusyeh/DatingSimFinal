@@ -1145,9 +1145,9 @@ MonoBehaviour:
   zoomInScript: {fileID: 1307471491}
   aikoCharacter: {fileID: 0}
   shaker: {fileID: 1307471490}
-  goodEndingSceneName: 
-  badEndingSceneName: 
-  transitionManager: {fileID: 0}
+  goodEndingSceneName: Scene_C
+  badEndingSceneName: Scene_C
+  transitionManager: {fileID: 1850282630}
   jumpscareVideoObject: {fileID: 0}
   jumpscareDuration: 2
   jumpscare1HideObjects: []

@@ -1,0 +1,409 @@
+{
+  "startNode": "after_class_start",
+  "nodes": [
+    {
+      "id": "after_class_start",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "You’re quiet again.....",
+      "next": "mc_quiet_reply"
+    },
+    {
+      "id": "mc_quiet_reply",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "???... What are you talking about?",
+      "shake": "good",
+      "next": "aiko_ask_happened"
+    },
+    {
+      "id": "aiko_ask_happened",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "Did something happen?",
+      "next": "mc_not_exactly"
+    },
+    {
+      "id": "mc_not_exactly",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Not exactly....?",
+      "next": "aiko_not_comforting"
+    },
+    {
+      "id": "aiko_not_comforting",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "That’s not comforting.",
+      "shake": "good",
+      "next": "mc_sorry"
+    },
+    {
+      "id": "mc_sorry",
+      "speaker": "You",
+      "expression": "sad",
+      "text": "Sorry......",
+      "next": "aiko_apology_comment"
+    },
+    {
+      "id": "aiko_apology_comment",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "…You don’t have to apologize so much.",
+      "next": "mc_kinda_do"
+    },
+    {
+      "id": "mc_kinda_do",
+      "speaker": "You",
+      "expression": "pout",
+      "text": "I kinda do.",
+      "next": "aiko_why"
+    },
+    {
+      "id": "aiko_why",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "Why?",
+      "next": "mc_regret"
+    },
+    {
+      "id": "mc_regret",
+      "speaker": "You",
+      "expression": "neutral",
+      "text": "Because if I don’t say this right, I’ll regret it.",
+      "next": "aiko_say_what"
+    },
+    {
+      "id": "aiko_say_what",
+      "speaker": "Aiko",
+      "expression": "shocked",
+      "text": "Say what?",
+      "shake": "good",
+      "next": "branch_stop_her"
+    },
+    {
+      "id": "branch_stop_her",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Aiko, wait.",
+          "next": "stop_best",
+          "isCorrect": true
+        },
+        {
+          "text": "Actually...... never mind.",
+          "next": "stop_hesitant",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "stop_best",
+      "speaker": "You",
+      "expression": "neutral",
+      "text": "Aiko, wait.",
+      "next": "aiko_serious"
+    },
+    {
+      "id": "aiko_serious",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "…Okay. You’re real serious now.",
+      "next": "confession_continues_1"
+    },
+    {
+      "id": "stop_hesitant",
+      "speaker": "You",
+      "expression": "shocked",
+      "text": "Never mind.",
+      "next": "aiko_disappointed"
+    },
+    {
+      "id": "aiko_disappointed",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "…Oh. That’s not what I was expecting.",
+      "shake": "good",
+      "next": "hesitant_recovery_choice"
+    },
+    {
+      "id": "hesitant_recovery_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "I just got nervous.",
+          "next": "hesitant_recover",
+          "isCorrect": true
+        },
+        {
+          "text": "I’ll text you later.",
+          "expression": "sad",
+          "next": "END_COOKED",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "hesitant_recover",
+      "speaker": "You",
+      "expression": "sad",
+      "text": "Wait..... I just got nervous.",
+      "next": "aiko_go_on"
+    },
+    {
+      "id": "aiko_go_on",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "…Go on.",
+      "next": "confession_continues_1"
+    },
+    {
+      "id": "confession_continues_1",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "You’re making this sound important.",
+      "next": "mc_it_is"
+    },
+    {
+      "id": "mc_it_is",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "It is.",
+      "next": "aiko_midterms"
+    },
+    {
+      "id": "aiko_midterms",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "More important than tomorrow’s midterms?",
+      "next": "mc_way_more"
+    },
+    {
+      "id": "mc_way_more",
+      "speaker": "You",
+      "expression": "shocked",
+      "text": "Way more important.",
+      "shake": "good",
+      "next": "aiko_worried"
+    },
+    {
+      "id": "aiko_worried",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "Now you’ve got me worried.",
+      "next": "mc_dont_be"
+    },
+    {
+      "id": "mc_dont_be",
+      "speaker": "You",
+      "expression": "neutral2",
+      "text": "Don’t be.",
+      "next": "aiko_worse"
+    },
+    {
+      "id": "aiko_worse",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "That makes it worse.",
+      "next": "mc_hold_back"
+    },
+    {
+      "id": "mc_hold_back",
+      "speaker": "You",
+      "expression": "sad",
+      "text": "I didn’t want today to end without saying something.",
+      "next": "aiko_saying_what_again"
+    },
+    {
+      "id": "aiko_saying_what_again",
+      "speaker": "Aiko",
+      "expression": "neutral",
+      "text": "Saying what?",
+      "next": "mc_holding_back"
+    },
+    {
+      "id": "mc_holding_back",
+      "speaker": "You",
+      "expression": "neutral",
+      "text": "Something I’ve been holding back.",
+      "next": "aiko_why_me"
+    },
+    {
+      "id": "aiko_why_me",
+      "speaker": "Aiko",
+      "expression": "sad",
+      "text": "…Why me?",
+      "next": "confession_style_choice"
+    },
+    {
+      "id": "confession_style_choice",
+      "speaker": "You",
+      "text": "",
+      "choices": [
+        {
+          "text": "Because I like you. Not casually.",
+          "next": "confess_direct",
+          "isCorrect": true
+        },
+        {
+          "text": "Because walking with you is the part of my day I replay.",
+          "next": "confess_soft",
+          "isCorrect": true
+        },
+        {
+          "text": "I was thinking maybe...",
+          "next": "confess_awkward",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "confess_direct",
+      "speaker": "You",
+      "expression": "neutral",
+      "text": "Because I like you. Not in a casual way. In a way that makes me overthink everything I say around you.",
+      "shake": "good",
+      "next": "aiko_reaction"
+    },
+    {
+      "id": "confess_soft",
+      "speaker": "You",
+      "expression": "neutral",
+      "text": "Because walking with you, talking like this, it’s the part of my day I keep replaying.",
+      "shake": "good",
+      "next": "aiko_reaction"
+    },
+    {
+      "id": "confess_awkward",
+      "speaker": "You",
+      "expression": "pout",
+      "text": "I was thinking maybe... If you wanted.........",
+      "next": "awkward_recovery_choice"
+    },
+    {
+      "id": "awkward_recovery_choice",
+      "speaker": "Aiko",
+      "expression": "happy",
+      "text": "You’re doing it again. Just say it.",
+      "choices": [
+        {
+          "text": "Okay. I like you.",
+          "next": "aiko_reaction",
+          "isCorrect": true
+        },
+        {
+          "text": "Forget it. This was a mistake.",
+          "next": "END_COOKED",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "aiko_reaction",
+      "speaker": "Aiko",
+      "expression": "shocked",
+      "text": "…You like me?",
+      "stopTimerAndHeartFX": true,
+      "next": "end1_choice"
+    },
+    {
+      "id": "end1_choice",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "?????????!!!?!",
+      "next": "end2_choice"
+    },
+    {
+      "id": "end2_choice",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "Ah-",
+      "shake": "good",
+      "next": "END3"
+    },
+
+    {
+      "id": "END3",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "This-",
+      "shake": "good",
+      "next": "END4"
+    },
+
+    {
+      "id": "END4",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "......",
+      "shake": "good",
+      "next": "END5"
+    },
+
+    {
+      "id": "END5",
+      "speaker": "Aiko",
+      "expression": "blushing",
+      "text": "..........",
+      "shake": "good",
+      "next": "END6"
+    },
+
+    {
+      "id": "END6",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "........I wish you had said something sooner...",
+      "shake": "good",
+      "next": "END7"
+    },
+
+    {
+      "id": "END7",
+      "speaker": "Aiko",
+      "expression": "happy",
+      "text": "hehe I like you too.",
+      "shake": "good",
+      "next": "END8"
+    },
+
+    {
+      "id": "END8",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "So... does this mean we're...?",
+      "next": "END_GOOD"
+    },
+
+
+    {
+      "id": "END_GOOD",
+      "speaker": "Aiko",
+      "expression": "smug",
+      "text": "....",
+      "endType": "good"
+    },
+
+
+
+
+
+    {
+      "id": "END_COOKED",
+      "speaker": "Narrator",
+      "text": "The moment slips away before it can finish forming.",
+      "zoomType": "start",
+      "zoomTarget": 3.5,
+      "zoomDuration": 2,
+      "next": "END_COOKED2"
+    },
+    {
+      "id": "END_COOKED2",
+      "speaker": "Narrator",
+      "text": "The moment slips away before it can finish forming.",
+      "endType": "bad"
+    }
+  ]
+}

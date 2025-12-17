@@ -184,7 +184,7 @@ public class TimerScript : MonoBehaviour
         }
     }
 
-   /* void EndGame()
+    void EndGame()
     {
         enabled = false;
         isBlinking = false;
@@ -198,9 +198,9 @@ public class TimerScript : MonoBehaviour
         DialogueManager dm = Object.FindFirstObjectByType<DialogueManager>();
         if (dm != null)
             dm.enabled = false;
-    }*/
+    }
 
-    void EndGame()
+    /* void EndGame()
     {
         enabled = false;
         isBlinking = false;
@@ -213,7 +213,7 @@ public class TimerScript : MonoBehaviour
         {
             SceneManager.LoadScene(jumpscareSceneName);
         }
-    }
+    } */
 
     public void RestartScene()
     {
