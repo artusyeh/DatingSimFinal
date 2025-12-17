@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/START.unity
     guid: 0a22ecc235a78a54482cdbe0d2ef3249
+  - enabled: 1
+    path: Assets/Scenes/Scene_MURDER.unity
+    guid: 3e0bf138dd6e81140a3a1ab3aca92f43
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
