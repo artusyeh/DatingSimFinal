@@ -89,10 +89,11 @@
         {
           "text": "Aiko, wait.",
           "next": "stop_best",
+          "delay": 5,
           "isCorrect": true
         },
         {
-          "text": "Actually...... never mind.",
+          "text": "Actually......",
           "next": "stop_hesitant",
           "isCorrect": false
         }
@@ -245,6 +246,7 @@
         {
           "text": "Because I like you. Not casually.",
           "next": "confess_direct",
+          "delay": 5,
           "isCorrect": true
         },
         {
@@ -264,16 +266,36 @@
       "speaker": "You",
       "expression": "neutral",
       "text": "Because I like you. Not in a casual way. In a way that makes me overthink everything I say around you.",
+      "next": "aiko_reaction"
+    },
+
+    {
+      "id": "aiko1",
+      "speaker": "Aiko",
+      "expression": "shocked",
+      "text": "......????",
+      "shake": "good",
+      "next": "aiko2"
+    },
+
+    {
+      "id": "aiko2",
+      "speaker": "Aiko",
+      "expression": "pout",
+      "text": "Wow that was so cringe.",
       "shake": "good",
       "next": "aiko_reaction"
     },
+
+
+
     {
       "id": "confess_soft",
       "speaker": "You",
       "expression": "neutral",
       "text": "Because walking with you, talking like this, it’s the part of my day I keep replaying.",
       "shake": "good",
-      "next": "aiko_reaction"
+      "next": "aiko1"
     },
     {
       "id": "confess_awkward",
@@ -285,12 +307,14 @@
     {
       "id": "awkward_recovery_choice",
       "speaker": "Aiko",
-      "expression": "happy",
+      "expression": "pout",
       "text": "You’re doing it again. Just say it.",
+      "shake": "good",
       "choices": [
         {
           "text": "Okay. I like you.",
           "next": "aiko_reaction",
+          "delay": 5,
           "isCorrect": true
         },
         {
@@ -364,8 +388,7 @@
       "id": "END7",
       "speaker": "Aiko",
       "expression": "happy",
-      "text": "hehe I like you too.",
-      "shake": "good",
+      "text": "Hehe. I like you too.",
       "next": "END8"
     },
 

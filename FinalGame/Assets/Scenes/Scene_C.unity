@@ -1166,7 +1166,7 @@ MonoBehaviour:
   aikoCharacter: {fileID: 1644592230}
   shaker: {fileID: 1307471490}
   goodEndingSceneName: Scene_Title
-  badEndingSceneName: Scene_KNIFE
+  badEndingSceneName: Scene_MURDER
   transitionManager: {fileID: 1850282630}
   jumpscareVideoObject: {fileID: 0}
   jumpscareDuration: 2
